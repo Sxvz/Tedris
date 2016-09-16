@@ -12,3 +12,6 @@
 - käännä palikkaa
 - pudota palikka loppuun asti
 - luovuta
+
+###Luokkakaavio
+![Luokkakaavio](dokumentaatio/luokkakaavio.png)
