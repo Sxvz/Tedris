@@ -1,15 +1,14 @@
 
 package sxvz.tedris.domain;
 
-import sxvz.tedris.engine.Suunta;
-import sxvz.tedris.logic.Tedris;
+import sxvz.tedris.engine.Pelilooppi;
 
 public class Palikka {
     private int x;
     private int y;
-    private Tedris peli;
+    private Pelilooppi peli;
     
-    public Palikka(int x, int y, Tedris peli) {
+    public Palikka(int x, int y, Pelilooppi peli) {
         this.x = x;
         this.y = y;
         this.peli = peli;

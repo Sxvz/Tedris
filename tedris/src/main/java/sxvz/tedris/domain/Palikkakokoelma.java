@@ -3,7 +3,6 @@ package sxvz.tedris.domain;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import sxvz.tedris.engine.Suunta;
 
 public abstract class Palikkakokoelma {
     protected ArrayList<Palikka> palikat;

@@ -6,16 +6,16 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
-import sxvz.tedris.logic.Tedris;
+import sxvz.tedris.engine.Pelilooppi;
 
-public class TedrisTest {
-    private Tedris peli;
+public class PelilooppiTest {
+    private Pelilooppi peli;
     private Debugkokoelma kokoelma;
     private Debugkokoelma kokoelma2;
     
     @Before
     public void setUp() {
-        peli = new Tedris(20,30);
+        peli = new Pelilooppi(20,30);
         kokoelma = new Debugkokoelma();
         kokoelma2 = new Debugkokoelma();
         

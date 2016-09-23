@@ -6,16 +6,16 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 import sxvz.tedris.engine.Nappaimistonkuuntelija;
-import sxvz.tedris.logic.Tedris;
+import sxvz.tedris.engine.Pelilooppi;
 
 public class Kayttoliittyma implements Runnable {
 
     private JFrame frame;
-    private Tedris peli;
+    private Pelilooppi peli;
     private int palikanKoko;
     private Piirtoalusta piirtoalusta;
 
-    public Kayttoliittyma(Tedris peli, int palikanKoko) {
+    public Kayttoliittyma(Pelilooppi peli, int palikanKoko) {
         this.peli = peli;
         this.palikanKoko = palikanKoko;
     }
@@ -39,7 +39,7 @@ public class Kayttoliittyma implements Runnable {
     public void luoKomponentit(Container container) {
         piirtoalusta = new Piirtoalusta(peli, palikanKoko);
         container.add(piirtoalusta);
-        frame.addKeyListener(new Nappaimistonkuuntelija());
+        frame.addKeyListener(new Nappaimistonkuuntelija(peli));
     }
 
 

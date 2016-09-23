@@ -1,31 +1,33 @@
 
-package sxvz.tedris.logic;
+package sxvz.tedris.engine;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.Timer;
+import sxvz.tedris.domain.Debugkokoelma;
 import sxvz.tedris.domain.Palikka;
 import sxvz.tedris.domain.Palikkakokoelma;
-import sxvz.tedris.engine.Paivitettava;
-import sxvz.tedris.engine.Suunta;
+import sxvz.tedris.domain.Suunta;
 
-public class Tedris extends Timer implements ActionListener {
+public class Pelilooppi extends Timer implements ActionListener {
     private final int pelialueenLeveys;
     private final int pelialueenKorkeus;
     private boolean peliKaynnissa;
     private Paivitettava paivitettava;
     private ArrayList<Palikkakokoelma> palikat;
     private Palikkakokoelma nykyinenPalikka;
+    private int countteri;
 
-    public Tedris(int leveys, int korkeus) {
-        super(1000, null);
+    public Pelilooppi(int leveys, int korkeus) {
+        super(100, null);
 
         this.pelialueenLeveys = leveys;
         this.pelialueenKorkeus = korkeus;
         this.peliKaynnissa = true;
         palikat = new ArrayList();
         nykyinenPalikka = null;
+        countteri = 9;
 
         addActionListener(this);
         setInitialDelay(2000);
@@ -38,16 +40,20 @@ public class Tedris extends Timer implements ActionListener {
             return;
         }
         
-        hallinnoiNykyistaPalikkaa();
+        if (countteri == 9) {
+            hallinnoiNykyistaPalikkaa();
+            countteri = 0;
+        }
         
         //tarkista täydet rivit
 
         paivitettava.paivita();
+        countteri++;
     }
 
     private void hallinnoiNykyistaPalikkaa() {
         if (nykyinenPalikka == null) {
-            //luodaan uusi palikkaKokoelma
+            nykyinenPalikka = new Debugkokoelma(new Palikka(pelialueenLeveys / 2, 0, this), new Palikka(pelialueenLeveys / 2 + 1, 0, this));
         } else {
             if (false == nykyinenPalikka.liiku(Suunta.ALAS)) {
                 palikat.add(nykyinenPalikka);
@@ -99,6 +105,10 @@ public class Tedris extends Timer implements ActionListener {
 
     public Palikkakokoelma getNykyinenPalikka() {
         return nykyinenPalikka;
+    }
+
+    public ArrayList<Palikkakokoelma> getPalikat() {
+        return palikat;
     }
     
     

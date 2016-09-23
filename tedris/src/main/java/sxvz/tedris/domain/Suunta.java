@@ -1,5 +1,5 @@
 
-package sxvz.tedris.engine;
+package sxvz.tedris.domain;
 
 public enum Suunta {
 

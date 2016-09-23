@@ -3,16 +3,15 @@ package sxvz.tedris.domain;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import sxvz.tedris.engine.Suunta;
-import sxvz.tedris.logic.Tedris;
+import sxvz.tedris.engine.Pelilooppi;
 
 
 public class PalikkaTest {
-    private Tedris peli;
+    private Pelilooppi peli;
     
     @Before
     public void setUp() {
-        peli = new Tedris(20,30);
+        peli = new Pelilooppi(20,30);
     }
     
     @Test

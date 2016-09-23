@@ -1,25 +1,25 @@
 
 package sxvz.tedris.domain;
 
+import java.awt.Color;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import sxvz.tedris.engine.Suunta;
-import sxvz.tedris.logic.Tedris;
+import sxvz.tedris.engine.Pelilooppi;
 
 public class DebugkokoelmaTest {
-    private Tedris peli;
+    private Pelilooppi peli;
     private Debugkokoelma kokoelma;
     
     @Before
     public void setUp() {
-        peli = new Tedris(20,30);
+        peli = new Pelilooppi(20,30);
         kokoelma = new Debugkokoelma();
     }
     
     @Test
     public void debugKokoelmanKonstruktoriToimii() {
-        assertEquals(null, kokoelma.getVari());
+        assertEquals(Color.RED, kokoelma.getVari());
         assertTrue(kokoelma.getPalikat().isEmpty());
     }
     
