@@ -54,12 +54,8 @@ public class Vapaustarkastaja {
     }
 
     public boolean voikoLiikkua(int x, int y) {
-        return onkoVapaa(x, y);
-    }
-
-    private boolean onkoVapaa(int x, int y) {
-
-        if (x <= -1 || x > pelialueenLeveys || y <= -1 || y > pelialueenKorkeus) {
+        
+        if (x <= -1 || x >= pelialueenLeveys || y <= -1 || y >= pelialueenKorkeus) {
             return false;
         }
 

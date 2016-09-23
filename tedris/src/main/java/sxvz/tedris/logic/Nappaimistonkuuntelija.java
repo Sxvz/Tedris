@@ -5,7 +5,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import sxvz.tedris.domain.Suunta;
 import sxvz.tedris.engine.Pelilooppi;
-import sxvz.tedris.logic.Vapaustarkastaja;
 
 public class Nappaimistonkuuntelija implements KeyListener {
     private Pelilooppi peli;
@@ -13,7 +12,7 @@ public class Nappaimistonkuuntelija implements KeyListener {
     
     public Nappaimistonkuuntelija(Pelilooppi peli) {
         this.peli = peli;
-        tarkastaja = peli.getTarkastaja();
+        tarkastaja = peli.getVapaustarkastaja();
     }
 
     @Override
