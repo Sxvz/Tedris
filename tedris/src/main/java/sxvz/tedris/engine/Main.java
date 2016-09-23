@@ -3,13 +3,13 @@ package sxvz.tedris.engine;
 
 import javax.swing.SwingUtilities;
 import sxvz.tedris.gui.Kayttoliittyma;
+import sxvz.tedris.logic.Vapaustarkastaja;
 
 public class Main {
     public static void main(String[] args) {
-        
-//        System.out.println("End of test");
                 
         Pelilooppi peli = new Pelilooppi(20,30);
+        peli.setVapaustarkastaja(new Vapaustarkastaja(peli));
 
         Kayttoliittyma kali = new Kayttoliittyma(peli, 20);
         SwingUtilities.invokeLater(kali);

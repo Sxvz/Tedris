@@ -5,7 +5,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
-import sxvz.tedris.engine.Nappaimistonkuuntelija;
+import sxvz.tedris.logic.Nappaimistonkuuntelija;
 import sxvz.tedris.engine.Pelilooppi;
 
 public class Kayttoliittyma implements Runnable {

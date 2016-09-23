@@ -20,7 +20,7 @@ public class DebugkokoelmaTest {
     @Test
     public void debugKokoelmanKonstruktoriToimii() {
         assertEquals(Color.RED, kokoelma.getVari());
-        assertTrue(kokoelma.getPalikat().isEmpty());
+        assertEquals(0, kokoelma.getPalikat().size());
     }
     
     @Test
@@ -46,19 +46,19 @@ public class DebugkokoelmaTest {
         assertEquals(8, kokoelma.getPalikat().get(1).getY());
     }
     
-    @Test
-    public void liikuPalauttaaTrueJosOnnistuu() {
-        kokoelma.lisaaPalikka(new Palikka(6,8,peli));
-        kokoelma.lisaaPalikka(new Palikka(6,7,peli));
-        
-        assertTrue(kokoelma.liiku(Suunta.ALAS));
-    }
-    
-    @Test
-    public void liikuPalauttaaFalseJosEpaonnistuu() {
-        kokoelma.lisaaPalikka(new Palikka(6,30,peli));
-        kokoelma.lisaaPalikka(new Palikka(6,29,peli));
-        
-        assertFalse(kokoelma.liiku(Suunta.ALAS));
-    }
+//    @Test
+//    public void liikuPalauttaaTrueJosOnnistuu() {
+//        kokoelma.lisaaPalikka(new Palikka(6,8,peli));
+//        kokoelma.lisaaPalikka(new Palikka(6,7,peli));
+//        
+//        assertTrue(kokoelma.liiku(Suunta.ALAS));
+//    }
+//    
+//    @Test
+//    public void liikuPalauttaaFalseJosEpaonnistuu() {
+//        kokoelma.lisaaPalikka(new Palikka(6,30,peli));
+//        kokoelma.lisaaPalikka(new Palikka(6,29,peli));
+//        
+//        assertFalse(kokoelma.liiku(Suunta.ALAS));
+//    }
 }

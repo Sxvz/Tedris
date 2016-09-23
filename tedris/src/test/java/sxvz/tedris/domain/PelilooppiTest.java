@@ -35,15 +35,15 @@ public class PelilooppiTest {
         assertTrue(peli.isPeliKaynnissa());
     }
     
-    @Test
-    public void onkoVapaaEiValehtele() {
-        assertFalse(peli.onkoVapaa(-1, 7));
-        assertFalse(peli.onkoVapaa(0, -3));
-        assertFalse(peli.onkoVapaa(0, 31));
-        assertFalse(peli.onkoVapaa(21, 0));
-        assertTrue(peli.onkoVapaa(15, 15));
-        assertTrue(peli.onkoVapaa(6, 7));
-        assertFalse(peli.onkoVapaa(6, 9));
-    }
+//    @Test
+//    public void onkoVapaaEiValehtele() {
+//        assertFalse(peli.onkoVapaa(-1, 7));
+//        assertFalse(peli.onkoVapaa(0, -3));
+//        assertFalse(peli.onkoVapaa(0, 31));
+//        assertFalse(peli.onkoVapaa(21, 0));
+//        assertTrue(peli.onkoVapaa(15, 15));
+//        assertTrue(peli.onkoVapaa(6, 7));
+//        assertFalse(peli.onkoVapaa(6, 9));
+//    }
 
 }

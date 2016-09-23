@@ -14,21 +14,6 @@ public class Palikka {
         this.peli = peli;
     }
     
-    protected boolean voikoLiikkua(Suunta s) {
-        if (s == Suunta.ALAS) {
-            return voikoLiikkua(x, y + 1);
-        } else if (s == Suunta.VASEN) {
-            return voikoLiikkua(x - 1, y);
-        } else if (s == Suunta.OIKEA) {
-            return voikoLiikkua(x + 1, y);
-        }
-        return false;
-    }
-    
-    protected boolean voikoLiikkua(int x, int y) {
-        return peli.onkoVapaa(x, y);
-    }
-    
     protected void liiku(Suunta s) {
         if (s == Suunta.ALAS) {
             y++;

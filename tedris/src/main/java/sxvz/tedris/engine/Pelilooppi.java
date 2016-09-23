@@ -9,6 +9,7 @@ import sxvz.tedris.domain.Debugkokoelma;
 import sxvz.tedris.domain.Palikka;
 import sxvz.tedris.domain.Palikkakokoelma;
 import sxvz.tedris.domain.Suunta;
+import sxvz.tedris.logic.Vapaustarkastaja;
 
 public class Pelilooppi extends Timer implements ActionListener {
     private final int pelialueenLeveys;
@@ -18,6 +19,7 @@ public class Pelilooppi extends Timer implements ActionListener {
     private ArrayList<Palikkakokoelma> palikat;
     private Palikkakokoelma nykyinenPalikka;
     private int countteri;
+    private Vapaustarkastaja tarkastaja;
 
     public Pelilooppi(int leveys, int korkeus) {
         super(100, null);
@@ -53,32 +55,20 @@ public class Pelilooppi extends Timer implements ActionListener {
 
     private void hallinnoiNykyistaPalikkaa() {
         if (nykyinenPalikka == null) {
+            //placeholder
             nykyinenPalikka = new Debugkokoelma(new Palikka(pelialueenLeveys / 2, 0, this), new Palikka(pelialueenLeveys / 2 + 1, 0, this));
         } else {
-            if (false == nykyinenPalikka.liiku(Suunta.ALAS)) {
+            boolean liikkuminenOnnistuu = tarkastaja.voikoKokoelmaLiikkua(nykyinenPalikka, Suunta.ALAS);
+            
+            if (liikkuminenOnnistuu == false) {
                 palikat.add(nykyinenPalikka);
                 nykyinenPalikka = null;
+            } else {
+                nykyinenPalikka.liiku(Suunta.ALAS);
             }
         }
     }
     
-    public boolean onkoVapaa(int x, int y) {
-        
-        if (x <= -1 || x > pelialueenLeveys || y <= -1 || y > pelialueenKorkeus) {
-            return false;
-        }
-        
-        for (Palikkakokoelma palikkakokoelma : palikat) {
-            for (Palikka palikka : palikkakokoelma.getPalikat()) {
-                if (palikka.getX() == x && palikka.getY() == y) {
-                    return false;
-                }
-            }
-        }
-        
-        return true;
-    }
-
     public int getPelialueenLeveys() {
         return pelialueenLeveys;
     }
@@ -109,6 +99,14 @@ public class Pelilooppi extends Timer implements ActionListener {
 
     public ArrayList<Palikkakokoelma> getPalikat() {
         return palikat;
+    }
+
+    public void setVapaustarkastaja(Vapaustarkastaja tarkastaja) {
+        this.tarkastaja = tarkastaja;
+    }
+
+    public Vapaustarkastaja getTarkastaja() {
+        return tarkastaja;
     }
     
     

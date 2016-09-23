@@ -1,15 +1,19 @@
 
-package sxvz.tedris.engine;
+package sxvz.tedris.logic;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import sxvz.tedris.domain.Suunta;
+import sxvz.tedris.engine.Pelilooppi;
+import sxvz.tedris.logic.Vapaustarkastaja;
 
 public class Nappaimistonkuuntelija implements KeyListener {
     private Pelilooppi peli;
+    private Vapaustarkastaja tarkastaja;
     
     public Nappaimistonkuuntelija(Pelilooppi peli) {
         this.peli = peli;
+        tarkastaja = peli.getTarkastaja();
     }
 
     @Override
@@ -25,11 +29,17 @@ public class Nappaimistonkuuntelija implements KeyListener {
         if (e.getKeyCode() == KeyEvent.VK_UP) {
             
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            peli.getNykyinenPalikka().liiku(Suunta.OIKEA);
+            tarkistaJaLiikuta(Suunta.OIKEA);
         } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-            peli.getNykyinenPalikka().liiku(Suunta.ALAS);
+            tarkistaJaLiikuta(Suunta.ALAS);
         } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            peli.getNykyinenPalikka().liiku(Suunta.VASEN);
+            tarkistaJaLiikuta(Suunta.VASEN);
+        }
+    }
+
+    private void tarkistaJaLiikuta(Suunta s) {
+        if (tarkastaja.voikoKokoelmaLiikkua(peli.getNykyinenPalikka(), s)) {
+            peli.getNykyinenPalikka().liiku(s);
         }
     }
 
