@@ -2,7 +2,6 @@ package sxvz.tedris.gui;
 
 import sxvz.tedris.engine.Paivitettava;
 import java.awt.Graphics;
-import java.util.ArrayList;
 import javax.swing.JPanel;
 import sxvz.tedris.domain.Palikka;
 import sxvz.tedris.domain.Palikkakokoelma;
@@ -22,8 +21,8 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         
-        if (peli.getNykyinenPalikka() != null) {
-            piirraKokoelma(g, peli.getNykyinenPalikka());
+        if (peli.getAktiivinenPalikka() != null) {
+            piirraKokoelma(g, peli.getAktiivinenPalikka());
         }
         
         if (peli.getPalikat().isEmpty()) {

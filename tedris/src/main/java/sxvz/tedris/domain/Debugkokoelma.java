@@ -18,4 +18,13 @@ public class Debugkokoelma extends Palikkakokoelma {
     public void lisaaPalikka(Palikka p) {
         palikat.add(p);
     }
+    
+    public void rivinLevyinenPalikka(int y) {
+        palikat.clear();
+        int i = 0;
+        while (i < 20) {
+            palikat.add(new Palikka(i, y));
+            i++;
+        }
+    }
 }

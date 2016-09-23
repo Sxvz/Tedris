@@ -18,7 +18,7 @@ public class Pelilooppi extends Timer implements ActionListener {
     private boolean peliKaynnissa;
     private Paivitettava paivitettava;
     private ArrayList<Palikkakokoelma> palikat;
-    private Palikkakokoelma nykyinenPalikka;
+    private Palikkakokoelma aktiivinenPalikka;
     private int countteri;
     private Vapaustarkastaja tarkastaja;
     private TaysienRivienTunnistaja rivienTunnistaja;
@@ -30,7 +30,7 @@ public class Pelilooppi extends Timer implements ActionListener {
         this.pelialueenKorkeus = korkeus;
         this.peliKaynnissa = true;
         palikat = new ArrayList();
-        nykyinenPalikka = null;
+        aktiivinenPalikka = null;
         countteri = 9;
 
         addActionListener(this);
@@ -40,6 +40,7 @@ public class Pelilooppi extends Timer implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (!peliKaynnissa) {
+            stop();
             return;
         }
 
@@ -56,23 +57,24 @@ public class Pelilooppi extends Timer implements ActionListener {
 
     private void kasitteleTaydetRivit() {
         ArrayList<Integer> taydetRivit = rivienTunnistaja.etsiTaydetRivit();
-        if (taydetRivit.size() != 0) {
-            //tuhoa palikat joiden y == listan numerot
+        if (!taydetRivit.isEmpty()) {
+            //tuhoa palikat joiden y == listan numero
+            return;
         }
     }
 
     private void hallinnoiNykyistaPalikkaa() {
-        if (nykyinenPalikka == null) {
+        if (aktiivinenPalikka == null) {
             //placeholder
-            nykyinenPalikka = new Debugkokoelma(new Palikka(pelialueenLeveys / 2, 0, this), new Palikka(pelialueenLeveys / 2 + 1, 0, this));
+            aktiivinenPalikka = new Debugkokoelma(new Palikka(pelialueenLeveys / 2, 0), new Palikka(pelialueenLeveys / 2 + 1, 0));
         } else {
-            boolean liikkuminenOnnistuu = tarkastaja.voikoKokoelmaLiikkua(nykyinenPalikka, Suunta.ALAS);
+            boolean liikkuminenOnnistuu = tarkastaja.voikoKokoelmaLiikkua(aktiivinenPalikka, Suunta.ALAS);
 
             if (liikkuminenOnnistuu == false) {
-                palikat.add(nykyinenPalikka);
-                nykyinenPalikka = null;
+                palikat.add(aktiivinenPalikka);
+                aktiivinenPalikka = null;
             } else {
-                nykyinenPalikka.liiku(Suunta.ALAS);
+                aktiivinenPalikka.liiku(Suunta.ALAS);
             }
         }
     }
@@ -97,12 +99,12 @@ public class Pelilooppi extends Timer implements ActionListener {
         palikat.add(p);
     }
 
-    public void setNykyinenPalikka(Palikkakokoelma nykyinenPalikka) {
-        this.nykyinenPalikka = nykyinenPalikka;
+    public void setAktiivinenPalikka(Palikkakokoelma aktiivinenPalikka) {
+        this.aktiivinenPalikka = aktiivinenPalikka;
     }
 
-    public Palikkakokoelma getNykyinenPalikka() {
-        return nykyinenPalikka;
+    public Palikkakokoelma getAktiivinenPalikka() {
+        return aktiivinenPalikka;
     }
 
     public ArrayList<Palikkakokoelma> getPalikat() {
@@ -117,8 +119,21 @@ public class Pelilooppi extends Timer implements ActionListener {
         return tarkastaja;
     }
 
-    public void setTaysienRivienTunnistaja(TaysienRivienTunnistaja RivienTunnistaja) {
-        this.rivienTunnistaja = RivienTunnistaja;
+    public void setTaysienRivienTunnistaja(TaysienRivienTunnistaja rivienTunnistaja) {
+        this.rivienTunnistaja = rivienTunnistaja;
     }
 
+    public void setPeliKaynnissa(boolean peliKaynnissa) {
+        this.peliKaynnissa = peliKaynnissa;
+    }
+
+    protected int getCountteri() {
+        return countteri;
+    }
+
+    protected void setCountteri(int countteri) {
+        this.countteri = countteri;
+    }
+
+    
 }

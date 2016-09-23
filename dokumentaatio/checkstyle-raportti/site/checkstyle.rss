@@ -25,8 +25,8 @@ under the License.
     <language>en-us</language>
     <copyright>&#169;2016</copyright>
     <item>
-      <title>File: 10,
-             Errors: 5,
+      <title>File: 13,
+             Errors: 0,
              Warnings: 0,
              Infos: 0
       </title>
@@ -47,20 +47,6 @@ under the License.
                           <tr>
                 <td>
                   <a href="${project.url}/checkstyle.html#sxvz.tedris.gui.Piirtoalusta.java">sxvz/tedris/gui/Piirtoalusta.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#sxvz.tedris.engine.Suunta.java">sxvz/tedris/engine/Suunta.java</a>
                 </td>
                 <td>
                   0
@@ -102,7 +88,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#sxvz.tedris.engine.Main.java">sxvz/tedris/engine/Main.java</a>
+                  <a href="${project.url}/checkstyle.html#sxvz.tedris.logic.Vapaustarkastaja.java">sxvz/tedris/logic/Vapaustarkastaja.java</a>
                 </td>
                 <td>
                   0
@@ -112,20 +98,6 @@ under the License.
                 </td>
                 <td>
                   0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#sxvz.tedris.logic.Tedris.java">sxvz/tedris/logic/Tedris.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  1
                 </td>
               </tr>
                           <tr>
@@ -144,7 +116,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#sxvz.tedris.engine.Nappaimistonkuuntelija.java">sxvz/tedris/engine/Nappaimistonkuuntelija.java</a>
+                  <a href="${project.url}/checkstyle.html#sxvz.tedris.gui.Kayttoliittyma.java">sxvz/tedris/gui/Kayttoliittyma.java</a>
                 </td>
                 <td>
                   0
@@ -153,12 +125,82 @@ under the License.
                   0
                 </td>
                 <td>
-                  4
+                  0
                 </td>
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#sxvz.tedris.gui.Kayttoliittyma.java">sxvz/tedris/gui/Kayttoliittyma.java</a>
+                  <a href="${project.url}/checkstyle.html#sxvz.tedris.domain.DummyPaivitettava.java">sxvz/tedris/domain/DummyPaivitettava.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#sxvz.tedris.logic.TaysienRivienTunnistaja.java">sxvz/tedris/logic/TaysienRivienTunnistaja.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#sxvz.tedris.domain.Suunta.java">sxvz/tedris/domain/Suunta.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#sxvz.tedris.engine.Main.java">sxvz/tedris/engine/Main.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#sxvz.tedris.logic.Nappaimistonkuuntelija.java">sxvz/tedris/logic/Nappaimistonkuuntelija.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#sxvz.tedris.engine.Pelilooppi.java">sxvz/tedris/engine/Pelilooppi.java</a>
                 </td>
                 <td>
                   0

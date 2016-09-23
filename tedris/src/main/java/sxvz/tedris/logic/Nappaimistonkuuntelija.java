@@ -1,4 +1,3 @@
-
 package sxvz.tedris.logic;
 
 import java.awt.event.KeyEvent;
@@ -7,9 +6,10 @@ import sxvz.tedris.domain.Suunta;
 import sxvz.tedris.engine.Pelilooppi;
 
 public class Nappaimistonkuuntelija implements KeyListener {
+
     private Pelilooppi peli;
     private Vapaustarkastaja tarkastaja;
-    
+
     public Nappaimistonkuuntelija(Pelilooppi peli) {
         this.peli = peli;
         tarkastaja = peli.getVapaustarkastaja();
@@ -21,12 +21,12 @@ public class Nappaimistonkuuntelija implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (peli.getNykyinenPalikka() == null) {
+        if (peli.getAktiivinenPalikka() == null) {
             return;
         }
-        
+
         if (e.getKeyCode() == KeyEvent.VK_UP) {
-            
+            pause();
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
             tarkistaJaLiikuta(Suunta.OIKEA);
         } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
@@ -36,15 +36,24 @@ public class Nappaimistonkuuntelija implements KeyListener {
         }
     }
 
+    private void pause() {
+        if (peli.isPeliKaynnissa()) {
+            peli.setPeliKaynnissa(false);
+        } else {
+            peli.setPeliKaynnissa(true);
+            peli.setInitialDelay(100);
+            peli.start();
+        }
+    }
+
     private void tarkistaJaLiikuta(Suunta s) {
-        if (tarkastaja.voikoKokoelmaLiikkua(peli.getNykyinenPalikka(), s)) {
-            peli.getNykyinenPalikka().liiku(s);
+        if (tarkastaja.voikoKokoelmaLiikkua(peli.getAktiivinenPalikka(), s)) {
+            peli.getAktiivinenPalikka().liiku(s);
         }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
     }
-    
-    
+
 }

@@ -8,10 +8,9 @@ public class Palikka {
     private int y;
     private Pelilooppi peli;
     
-    public Palikka(int x, int y, Pelilooppi peli) {
+    public Palikka(int x, int y) {
         this.x = x;
         this.y = y;
-        this.peli = peli;
     }
     
     protected void liiku(Suunta s) {
