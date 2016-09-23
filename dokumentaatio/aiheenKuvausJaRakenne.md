@@ -10,7 +10,7 @@
 **Toiminnot pelissä:**
 - liikuta palikkaa oikealle tai vasemmalle
 - käännä palikkaa
-- pudota palikka loppuun asti
+- pudota palikkaa nopeammin
 - luovuta
 
 ###Luokkakaavio
