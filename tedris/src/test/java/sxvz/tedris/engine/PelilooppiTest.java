@@ -7,8 +7,6 @@ import org.junit.Test;
 import sxvz.tedris.domain.Debugkokoelma;
 import sxvz.tedris.domain.DummyPaivitettava;
 import sxvz.tedris.domain.Palikka;
-import sxvz.tedris.logic.TaysienRivienTunnistaja;
-import sxvz.tedris.logic.Vapaustarkastaja;
 
 public class PelilooppiTest {
     private Pelilooppi peli;
@@ -26,9 +24,6 @@ public class PelilooppiTest {
         kokoelma2.lisaaPalikka(new Palikka(5,9));
         kokoelma2.lisaaPalikka(new Palikka(6,9));
         
-        peli.setVapaustarkastaja(new Vapaustarkastaja(peli));
-        peli.setTaysienRivienTunnistaja(new TaysienRivienTunnistaja(peli));
-        
         peli.setPaivitettava(new DummyPaivitettava());
         
         peli.setAktiivinenPalikka(kokoelma);
@@ -43,6 +38,10 @@ public class PelilooppiTest {
         assertEquals(2000, peli.getInitialDelay());
         assertEquals(1, peli.getActionListeners().length);
         assertEquals(9, peli.getCountteri());
+        assertFalse(peli.getTaysienRivienKasittelija() == null);
+        assertFalse(peli.getVapaustarkastaja() == null);
+        assertFalse(peli.getAktiivinenPalikka() == null);
+        assertFalse(peli.getPalikat() == null);
     }
     
     @Test
@@ -57,6 +56,9 @@ public class PelilooppiTest {
         peli.actionPerformed(null);
         peli.actionPerformed(null);
         assertEquals(2, peli.getCountteri());
+        peli.setCountteri(9);
+        peli.actionPerformed(null);
+        assertEquals(1, peli.getCountteri());
     }
     
     @Test
@@ -79,8 +81,9 @@ public class PelilooppiTest {
     
     @Test
     public void aktiivinenPalikkaPutoaa() {
-        peli.setAktiivinenPalikka(null);
-        peli.actionPerformed(null);
+        Debugkokoelma k = new Debugkokoelma();
+        k.lisaaPalikka(new Palikka(0,0));
+        peli.setAktiivinenPalikka(k);
         peli.setCountteri(9);
         peli.actionPerformed(null);
         assertEquals(1, peli.getAktiivinenPalikka().getPalikat().get(0).getY());
@@ -94,16 +97,5 @@ public class PelilooppiTest {
         peli.actionPerformed(null);
         assertTrue(peli.getAktiivinenPalikka() == null);
     }
-    
-//    @Test
-//    public void onkoVapaaEiValehtele() {
-//        assertFalse(peli.onkoVapaa(-1, 7));
-//        assertFalse(peli.onkoVapaa(0, -3));
-//        assertFalse(peli.onkoVapaa(0, 31));
-//        assertFalse(peli.onkoVapaa(21, 0));
-//        assertTrue(peli.onkoVapaa(15, 15));
-//        assertTrue(peli.onkoVapaa(6, 7));
-//        assertFalse(peli.onkoVapaa(6, 9));
-//    }
 
 }

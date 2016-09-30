@@ -37,9 +37,9 @@ public class PalikkaTest {
     public void palikkaLiikkuuKoordinaateilla() {
         Palikka p = new Palikka(6,8);
         
-        p.liiku(5, -3);
-        assertEquals(11, p.getX());
-        assertEquals(5, p.getY());
+        p.liiku(7, 10);
+        assertEquals(7, p.getX());
+        assertEquals(10, p.getY());
     }
     
 }

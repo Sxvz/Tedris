@@ -1,6 +1,7 @@
 
-package sxvz.tedris.logic;
+package sxvz.tedris.gui;
 
+import sxvz.tedris.gui.Nappaimistonkuuntelija;
 import java.awt.event.KeyEvent;
 import static org.junit.Assert.*;
 import org.junit.Before;

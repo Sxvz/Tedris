@@ -4,11 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.Timer;
-import sxvz.tedris.domain.Debugkokoelma;
-import sxvz.tedris.domain.Palikka;
 import sxvz.tedris.domain.Palikkakokoelma;
-import sxvz.tedris.domain.Suunta;
-import sxvz.tedris.logic.TaysienRivienTunnistaja;
+import sxvz.tedris.logic.AktiivisenPalikanHallinnoija;
+import sxvz.tedris.logic.TaysienRivienKasittelija;
 import sxvz.tedris.logic.Vapaustarkastaja;
 
 public class Pelilooppi extends Timer implements ActionListener {
@@ -21,7 +19,8 @@ public class Pelilooppi extends Timer implements ActionListener {
     private Palikkakokoelma aktiivinenPalikka;
     private int countteri;
     private Vapaustarkastaja tarkastaja;
-    private TaysienRivienTunnistaja rivienTunnistaja;
+    private TaysienRivienKasittelija rivienKasittelija;
+    private AktiivisenPalikanHallinnoija aktiivisenHallinnoija;
 
     public Pelilooppi(int leveys, int korkeus) {
         super(100, null);
@@ -35,6 +34,10 @@ public class Pelilooppi extends Timer implements ActionListener {
 
         addActionListener(this);
         setInitialDelay(2000);
+        
+        tarkastaja = new Vapaustarkastaja(this);
+        rivienKasittelija = new TaysienRivienKasittelija(this);
+        aktiivisenHallinnoija = new AktiivisenPalikanHallinnoija(this);
     }
 
     @Override
@@ -45,38 +48,14 @@ public class Pelilooppi extends Timer implements ActionListener {
         }
 
         if (countteri == 9) {
-            hallinnoiNykyistaPalikkaa();
-            kasitteleTaydetRivit();
-            
+            aktiivisenHallinnoija.hallinnoiAktiivistaPalikkaa(aktiivinenPalikka);
+            rivienKasittelija.kasitteleTaydetRivit();
+
             countteri = 0;
         }
 
         paivitettava.paivita();
         countteri++;
-    }
-
-    private void kasitteleTaydetRivit() {
-        ArrayList<Integer> taydetRivit = rivienTunnistaja.etsiTaydetRivit();
-        if (!taydetRivit.isEmpty()) {
-            //tuhoa palikat joiden y == listan numero
-            return;
-        }
-    }
-
-    private void hallinnoiNykyistaPalikkaa() {
-        if (aktiivinenPalikka == null) {
-            //placeholder
-            aktiivinenPalikka = new Debugkokoelma(new Palikka(pelialueenLeveys / 2, 0), new Palikka(pelialueenLeveys / 2 + 1, 0));
-        } else {
-            boolean liikkuminenOnnistuu = tarkastaja.voikoKokoelmaLiikkua(aktiivinenPalikka, Suunta.ALAS);
-
-            if (liikkuminenOnnistuu == false) {
-                palikat.add(aktiivinenPalikka);
-                aktiivinenPalikka = null;
-            } else {
-                aktiivinenPalikka.liiku(Suunta.ALAS);
-            }
-        }
     }
 
     public int getPelialueenLeveys() {
@@ -111,16 +90,8 @@ public class Pelilooppi extends Timer implements ActionListener {
         return palikat;
     }
 
-    public void setVapaustarkastaja(Vapaustarkastaja tarkastaja) {
-        this.tarkastaja = tarkastaja;
-    }
-
     public Vapaustarkastaja getVapaustarkastaja() {
         return tarkastaja;
-    }
-
-    public void setTaysienRivienTunnistaja(TaysienRivienTunnistaja rivienTunnistaja) {
-        this.rivienTunnistaja = rivienTunnistaja;
     }
 
     public void setPeliKaynnissa(boolean peliKaynnissa) {
@@ -135,5 +106,17 @@ public class Pelilooppi extends Timer implements ActionListener {
         this.countteri = countteri;
     }
 
+    public void setPalikat(ArrayList<Palikkakokoelma> palikat) {
+        this.palikat = palikat;
+    }
+
+    public TaysienRivienKasittelija getTaysienRivienKasittelija() {
+        return rivienKasittelija;
+    }
+
+    public AktiivisenPalikanHallinnoija getAktiivisenPalikanHallinnoija() {
+        return aktiivisenHallinnoija;
+    }
+    
     
 }

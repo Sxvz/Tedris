@@ -18,48 +18,38 @@ public class Vapaustarkastaja {
     }
 
     public boolean voikoKokoelmaLiikkua(Palikkakokoelma k, Suunta s) {
-        boolean vapaata = false;
-        
-        for (Palikka p : k.getPalikat()) {
-            int x = p.getX();
-            int y = p.getY();
-
-            if (s == Suunta.ALAS) {
-                vapaata = voikoLiikkua(x, y + 1);
-            } else if (s == Suunta.VASEN) {
-                vapaata = voikoLiikkua(x - 1, y);
-            } else if (s == Suunta.OIKEA) {
-                vapaata = voikoLiikkua(x + 1, y);
-            }
-            
-            if (!vapaata) {
+        for (Palikka p : k.getPalikat()) {   
+            if (!voikoLiikkua(k, p, s)) {
                 return false;
             }
         }
-        return vapaata;
+        return true;
     }
 
-    public boolean voikoLiikkua(Palikka p, Suunta s) {
+    public boolean voikoLiikkua(Palikkakokoelma k, Palikka p, Suunta s) {
         int x = p.getX();
         int y = p.getY();
 
         if (s == Suunta.ALAS) {
-            return voikoLiikkua(x, y + 1);
+            return voikoLiikkua(k, x, y + 1);
         } else if (s == Suunta.VASEN) {
-            return voikoLiikkua(x - 1, y);
+            return voikoLiikkua(k, x - 1, y);
         } else if (s == Suunta.OIKEA) {
-            return voikoLiikkua(x + 1, y);
+            return voikoLiikkua(k, x + 1, y);
         }
         return false;
     }
 
-    public boolean voikoLiikkua(int x, int y) {
+    public boolean voikoLiikkua(Palikkakokoelma liikkuvanKokoelma, int x, int y) {
         
         if (x <= -1 || x >= pelialueenLeveys || y <= -1 || y >= pelialueenKorkeus) {
             return false;
         }
 
         for (Palikkakokoelma palikkakokoelma : peli.getPalikat()) {
+            if (palikkakokoelma.equals(liikkuvanKokoelma)) {
+                continue;
+            }
             for (Palikka palikka : palikkakokoelma.getPalikat()) {
                 if (palikka.getX() == x && palikka.getY() == y) {
                     return false;
@@ -67,6 +57,33 @@ public class Vapaustarkastaja {
             }
         }
 
+        return true;
+    }
+    
+    public boolean voikoKokoelmaKaantya(Palikkakokoelma k, int kiertosuunta) {
+        if (k.getKaantymisInfo() == null) {
+            return false;
+        }
+        
+        Palikka p;
+        int haettavaKaantymisInfo;
+        for (int i = 1; i < 4; i++) {
+            p = k.getPalikat().get(i);
+            haettavaKaantymisInfo = k.getOrientaatio() + kiertosuunta;
+            
+            if (haettavaKaantymisInfo > 3) {
+                haettavaKaantymisInfo = 0;
+            } else if (haettavaKaantymisInfo < 0) {
+                haettavaKaantymisInfo = 3;
+            }
+            
+            if (!voikoLiikkua(k,
+                    k.getPalikat().get(0).getX() + k.getKaantymisInfo().get(haettavaKaantymisInfo).get(i - 1)[0],
+                    k.getPalikat().get(0).getY() + k.getKaantymisInfo().get(haettavaKaantymisInfo).get(i - 1)[1])) {
+                return false;
+            }
+        }
+        
         return true;
     }
 }

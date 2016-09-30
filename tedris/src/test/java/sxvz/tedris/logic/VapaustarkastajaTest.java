@@ -4,7 +4,9 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import sxvz.tedris.domain.Debugkokoelma;
+import sxvz.tedris.domain.NelioPalikka;
 import sxvz.tedris.domain.Palikka;
+import sxvz.tedris.domain.PitkaPalikka;
 import sxvz.tedris.domain.Suunta;
 import sxvz.tedris.engine.Pelilooppi;
 
@@ -50,8 +52,60 @@ public class VapaustarkastajaTest {
     public void voikoLiikkuaToimii() {
         Palikka p = new Palikka(5, 5);
 
-        assertFalse(tarkastaja.voikoLiikkua(p, Suunta.ALAS));
-        assertFalse(tarkastaja.voikoLiikkua(p, Suunta.VASEN));
-        assertTrue(tarkastaja.voikoLiikkua(p, Suunta.OIKEA));
+        assertFalse(tarkastaja.voikoLiikkua(null, p, Suunta.ALAS));
+        assertFalse(tarkastaja.voikoLiikkua(null, p, Suunta.VASEN));
+        assertTrue(tarkastaja.voikoLiikkua(null, p, Suunta.OIKEA));
+        assertFalse(tarkastaja.voikoLiikkua(null, p, null));
+    }
+    
+    @Test
+    public void palikkaEiPoistuPelialueelta() {
+        Palikka p = new Palikka(0, 30);
+        Palikka p2 = new Palikka(20, 0);
+
+        assertFalse(tarkastaja.voikoLiikkua(null, p, Suunta.VASEN));
+        assertFalse(tarkastaja.voikoLiikkua(null, p2, Suunta.OIKEA));
+        assertFalse(tarkastaja.voikoLiikkua(null, p, Suunta.ALAS));
+    }
+    
+    @Test
+    public void kieltaaKaantymisenJosTiellaSeina() {
+        PitkaPalikka k = new PitkaPalikka(null, 1, 0);
+
+        assertFalse(tarkastaja.voikoKokoelmaKaantya(k, 1));
+    }
+    
+    @Test
+    public void kieltaaKaantymisenJosTiellaPalikka() {
+        PitkaPalikka k = new PitkaPalikka(null, 5, 4);
+
+        assertFalse(tarkastaja.voikoKokoelmaKaantya(k, 1));
+    }
+    
+    @Test
+    public void salliiKaantymisenJosVapaata() {
+        PitkaPalikka k = new PitkaPalikka(null, 10, 10);
+
+        assertTrue(tarkastaja.voikoKokoelmaKaantya(k, 1));
+    }
+    
+    @Test
+    public void kieltaaKaantymisenJosInfoOnNull() {
+        NelioPalikka k = new NelioPalikka(null, 10, 10);
+
+        assertFalse(tarkastaja.voikoKokoelmaKaantya(k, 1));
+    }
+    
+    @Test
+    public void kaantumisenTutkijaEiHammennyRajojenYlityksista() {
+        PitkaPalikka k = new PitkaPalikka(null, 10, 10);
+
+        k.kaanny(1);
+        k.kaanny(1);
+        k.kaanny(1);
+        assertTrue(tarkastaja.voikoKokoelmaKaantya(k, 1));
+        
+        k.kaanny(1);
+        assertTrue(tarkastaja.voikoKokoelmaKaantya(k, -1));
     }
 }

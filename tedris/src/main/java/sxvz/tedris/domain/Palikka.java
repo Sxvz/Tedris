@@ -1,12 +1,9 @@
 
 package sxvz.tedris.domain;
 
-import sxvz.tedris.engine.Pelilooppi;
-
 public class Palikka {
     private int x;
     private int y;
-    private Pelilooppi peli;
     
     public Palikka(int x, int y) {
         this.x = x;
@@ -23,9 +20,9 @@ public class Palikka {
         }
     }
     
-    protected void liiku(int dx, int dy) {
-        x = x + dx;
-        y = y + dy;
+    protected void liiku(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 
     public int getX() {

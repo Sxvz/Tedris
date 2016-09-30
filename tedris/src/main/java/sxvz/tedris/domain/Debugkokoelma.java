@@ -7,6 +7,7 @@ public class Debugkokoelma extends Palikkakokoelma {
     
     public Debugkokoelma() {
         super(Color.RED);
+        kaantymisInfo = null;
     }
     
     public Debugkokoelma(Palikka p, Palikka p2) {

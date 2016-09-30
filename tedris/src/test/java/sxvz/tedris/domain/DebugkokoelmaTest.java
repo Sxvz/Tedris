@@ -4,16 +4,13 @@ import java.awt.Color;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import sxvz.tedris.engine.Pelilooppi;
 
 public class DebugkokoelmaTest {
 
-    private Pelilooppi peli;
     private Debugkokoelma kokoelma;
 
     @Before
     public void setUp() {
-        peli = new Pelilooppi(20, 30);
         kokoelma = new Debugkokoelma();
     }
 
@@ -60,5 +57,23 @@ public class DebugkokoelmaTest {
 
         assertEquals(20, kokoelma.getPalikat().size());
         assertEquals(7, kokoelma.getPalikat().get(2).getY());
+    }
+    
+    @Test
+    public void orientaatioMuuttuuOikein() {
+        kokoelma.kaanny(-1);
+        assertEquals(3, kokoelma.getOrientaatio());
+        kokoelma.kaanny(1);
+        kokoelma.kaanny(1);
+        kokoelma.kaanny(1);
+        assertEquals(2, kokoelma.getOrientaatio());
+        kokoelma.kaanny(1);
+        kokoelma.kaanny(1);
+        assertEquals(0, kokoelma.getOrientaatio());
+    }
+    
+    @Test
+    public void kaantymisInfoDebugkokoelmalleOnNull() {
+        assertEquals(null, kokoelma.getKaantymisInfo());
     }
 }
