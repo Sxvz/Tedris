@@ -7,3 +7,4 @@ Päivä | Tunnit | Kuvaus
 24.09.2016 | 1,5h | Täysien rivien tuhoaminen ja ei aktiivisten palikoiden putoaminen
 26.09.2016 | 2h | Edellisten fiksausta
 30.09.2016 | 5h | Edellisten fiksausta ja palikoiden kääntymistä sekä testeja
+30.09.2016 | 3h | Javadoc ja luokkakaavio
