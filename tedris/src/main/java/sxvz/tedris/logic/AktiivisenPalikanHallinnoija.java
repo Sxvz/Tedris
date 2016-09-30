@@ -9,12 +9,22 @@ import sxvz.tedris.domain.PitkaPalikka;
 import sxvz.tedris.domain.Suunta;
 import sxvz.tedris.engine.Pelilooppi;
 
+/**
+ * Luokka, joka huolehtii aktiivisesta palikasta.
+ * 
+ * @see sxvz.tedris.engine.Pelilooppi
+ */
 public class AktiivisenPalikanHallinnoija {
 
     private Pelilooppi peli;
     private Random random;
     private ArrayList<Color> varit;
-
+    
+    /**
+     * Alustaa tarvittavat muuttujat ja määrittää mahdoliset palikan värit.
+     * 
+     * @param peli Pelilooppi
+     */
     public AktiivisenPalikanHallinnoija(Pelilooppi peli) {
         this.peli = peli;
         random = new Random();
@@ -28,6 +38,12 @@ public class AktiivisenPalikanHallinnoija {
         varit.add(Color.YELLOW);
     }
 
+    /**
+     * Huolehtii aktiivisen palikan putoamisesta ja arpoo uuden, kun vanha
+     * liimautuu lattiaan.
+     * 
+     * @param aktiivinen 
+     */
     public void hallinnoiAktiivistaPalikkaa(Palikkakokoelma aktiivinen) {
         if (aktiivinen == null) {
             peli.setAktiivinenPalikka(luoUusiPalikka());

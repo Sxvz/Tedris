@@ -7,14 +7,28 @@ import sxvz.tedris.domain.Palikkakokoelma;
 import sxvz.tedris.domain.Suunta;
 import sxvz.tedris.engine.Pelilooppi;
 
+/**
+ * Luokka, joka etsii ja tuhoaa täydet rivit pyydettäessä.
+ * 
+ * @see sxvz.tedris.engine.Pelilooppi
+ */
 public class TaysienRivienKasittelija {
 
     private Pelilooppi peli;
 
+    /**
+     * Luo yhteyden pelilooppiin.
+     * 
+     * @param peli Pelilooppi
+     */
     public TaysienRivienKasittelija(Pelilooppi peli) {
         this.peli = peli;
     }
 
+    /**
+     * Etsii täydet rivit.
+     * Jos täysiä rivejä löytyy ne tuhotaan ja palikat jaetaan uusiin kokoelmiin.
+     */
     public void kasitteleTaydetRivit() {
         ArrayList<Integer> taydetRivit = etsiTaydetRivit();
 

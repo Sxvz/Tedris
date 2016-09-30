@@ -3,9 +3,12 @@ package sxvz.tedris.engine;
 
 import javax.swing.SwingUtilities;
 import sxvz.tedris.gui.Kayttoliittyma;
-import sxvz.tedris.logic.TaysienRivienKasittelija;
-import sxvz.tedris.logic.Vapaustarkastaja;
 
+/**
+ * Huolehtii pelin välttämättömyyksien luomisesta ja pelin käynistymisestä.
+ * 
+ * @see sxvz.tedris.engine.Pelilooppi
+ */
 public class Main {
     public static void main(String[] args) {
                 

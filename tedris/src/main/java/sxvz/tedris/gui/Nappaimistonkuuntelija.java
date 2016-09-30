@@ -4,12 +4,19 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import sxvz.tedris.domain.Suunta;
 import sxvz.tedris.engine.Pelilooppi;
-import sxvz.tedris.logic.Vapaustarkastaja;
 
+/**
+ * Luokka, joka huolehtii näppäin-inputtien kuuntelusta.
+ */
 public class Nappaimistonkuuntelija implements KeyListener {
 
     private Pelilooppi peli;
 
+    /**
+     * Konstruktori, joka luo kuuntelijalle yhteyden pelilooppiin.
+     * 
+     * @param peli Pelilooppi
+     */
     public Nappaimistonkuuntelija(Pelilooppi peli) {
         this.peli = peli;
     }
@@ -17,7 +24,16 @@ public class Nappaimistonkuuntelija implements KeyListener {
     @Override
     public void keyTyped(KeyEvent e) {
     }
-
+    
+    /**
+     * Käsittelee näppäimistön painallukset ja liikuttaa aktiivista palikkaa
+     * sen mukaan. Tarkistaa onko liikkuminen sallittua.
+     * Q- ja E-näppäimet kääntävät aktiivista palikkaa.
+     * A-, S, ja D-näppäimet liikuttelevat aktiivista palikkaa sivuille ja alas.
+     * W-näppäin laittaa tauon päälle.
+     * 
+     * @param e Näppäimistöstä tuleva inputti
+     */
     @Override
     public void keyPressed(KeyEvent e) {
         if (peli.getAktiivinenPalikka() == null) {

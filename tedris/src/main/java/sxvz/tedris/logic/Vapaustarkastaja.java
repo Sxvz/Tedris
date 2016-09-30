@@ -5,18 +5,36 @@ import sxvz.tedris.domain.Palikkakokoelma;
 import sxvz.tedris.domain.Suunta;
 import sxvz.tedris.engine.Pelilooppi;
 
+/**
+ * Huolehtii siitä, että palikat eivät poistu pelialueelta tai mene päällekkäin.
+ * 
+ * @see sxvz.tedris.engine.Pelilooppi
+ */
 public class Vapaustarkastaja {
 
     private Pelilooppi peli;
     private int pelialueenKorkeus;
     private int pelialueenLeveys;
 
+    /**
+     * Antaa yhteyden pelilooppiin ja välittää pelialueen koon.
+     * 
+     * @param peli 
+     */
     public Vapaustarkastaja(Pelilooppi peli) {
         this.peli = peli;
         pelialueenKorkeus = peli.getPelialueenKorkeus();
         pelialueenLeveys = peli.getPelialueenLeveys();
     }
 
+    /**
+     * Kertoo voiko kokonainen kokoelma liikkua johonkin suuntaan.
+     * 
+     * @param k Liikutettava kokoelma
+     * @param s Haluttu suunta
+     * 
+     * @return Kertoo onko vapaata liikua
+     */
     public boolean voikoKokoelmaLiikkua(Palikkakokoelma k, Suunta s) {
         for (Palikka p : k.getPalikat()) {   
             if (!voikoLiikkua(k, p, s)) {
@@ -26,6 +44,17 @@ public class Vapaustarkastaja {
         return true;
     }
 
+    /**
+     * Kertoo voiko yksittäinen palikka liikkua. Parametrinä oleva kokoelma
+     * välitetään kutsuttavalle metodille. Tämän kokoelman palikat eivät estä
+     * liikkumista.
+     * 
+     * @param k Kokoelma, joka ei estä liikkumista
+     * @param p Palikka, jota liikutetaan
+     * @param s Haluttu suunta
+     * 
+     * @return Onko liikkuminen mahdollista
+     */
     public boolean voikoLiikkua(Palikkakokoelma k, Palikka p, Suunta s) {
         int x = p.getX();
         int y = p.getY();
@@ -40,6 +69,17 @@ public class Vapaustarkastaja {
         return false;
     }
 
+    /**
+     * Kertoo voiko palikka liikkua annettuihin koordinaatteihin.
+     * Jos parametrinä annetaan kokoelma, kyseisen kokoelman palikat eivät
+     * setä liikkumista.
+     * 
+     * @param liikkuvanKokoelma Liikutettavan palikan kokoelma
+     * @param x Kohde x-koordinaatti
+     * @param y Kohde y-koordinaatti
+     * 
+     * @return Onnistuuko liikkuminen
+     */
     public boolean voikoLiikkua(Palikkakokoelma liikkuvanKokoelma, int x, int y) {
         
         if (x <= -1 || x >= pelialueenLeveys || y <= -1 || y >= pelialueenKorkeus) {
@@ -60,6 +100,17 @@ public class Vapaustarkastaja {
         return true;
     }
     
+    /**
+     * Kertoo voiko kokoelma kääntyä esteettä.
+     * Lukee kääntymiseen vaadittavat paikat palikan kääntymisinfosta.
+     * Positiivinen kiertosuunta vastaa myötäpäivään kääntymistä ja negatiivinen
+     * vastapäivään kääntymistä.
+     * 
+     * @param k Käännettävä kokoelma
+     * @param kiertosuunta Haluttu kiertosuunta
+     * 
+     * @return Onko kääntyminen mahdolista
+     */
     public boolean voikoKokoelmaKaantya(Palikkakokoelma k, int kiertosuunta) {
         if (k.getKaantymisInfo() == null) {
             return false;

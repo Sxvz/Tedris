@@ -1,10 +1,21 @@
 
 package sxvz.tedris.domain;
 
+/**
+ * Perus palikka kokoelmiin sijoittamista varten.
+ * 
+ * @see sxvz.tedris.domain.Palikkakokoelma
+ */
 public class Palikka {
     private int x;
     private int y;
     
+    /**
+     * Konstruktori palikan luontia varten.
+     * 
+     * @param x X-koordinaatti
+     * @param y Y-koordinaatti
+     */
     public Palikka(int x, int y) {
         this.x = x;
         this.y = y;

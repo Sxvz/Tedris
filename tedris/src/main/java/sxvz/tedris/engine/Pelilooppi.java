@@ -9,6 +9,14 @@ import sxvz.tedris.logic.AktiivisenPalikanHallinnoija;
 import sxvz.tedris.logic.TaysienRivienKasittelija;
 import sxvz.tedris.logic.Vapaustarkastaja;
 
+/**
+ * Luokka, joka huolehtii pelin perus elintoiminnoista.
+ * Perustuu Timer-luokkaan tasaisempaa syorituskykyä varten.
+ * 
+ * @see sxvz.tedris.logic.AktiivisenPalikanHallinnoija
+ * @see sxvz.tedris.logic.TaysienRivienKasittelija
+ * @see sxvz.tedris.logic.Vapaustarkastaja
+ */
 public class Pelilooppi extends Timer implements ActionListener {
 
     private final int pelialueenLeveys;
@@ -22,6 +30,12 @@ public class Pelilooppi extends Timer implements ActionListener {
     private TaysienRivienKasittelija rivienKasittelija;
     private AktiivisenPalikanHallinnoija aktiivisenHallinnoija;
 
+    /**
+     * Konstruktori, joka huolehtii alkuarvojen asettamisesta.
+     * 
+     * @param leveys Pelialueen leveys
+     * @param korkeus Pelialueen korkeus
+     */
     public Pelilooppi(int leveys, int korkeus) {
         super(100, null);
 
@@ -34,12 +48,19 @@ public class Pelilooppi extends Timer implements ActionListener {
 
         addActionListener(this);
         setInitialDelay(2000);
-        
+
         tarkastaja = new Vapaustarkastaja(this);
         rivienKasittelija = new TaysienRivienKasittelija(this);
         aktiivisenHallinnoija = new AktiivisenPalikanHallinnoija(this);
     }
 
+    /**
+     * Peliä pyörittävät toiminnot.
+     * Päivitää ruutua useammin, kuin suorittaa aktiivisen palikan pudottamisen
+     * ja täysien rivien etsimisen.
+     * 
+     * @param ae Timeri huolehtii tästä
+     */
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (!peliKaynnissa) {
@@ -74,8 +95,13 @@ public class Pelilooppi extends Timer implements ActionListener {
         return peliKaynnissa;
     }
 
-    public void lisaaPalikoita(Palikkakokoelma p) {
-        palikat.add(p);
+    /**
+     * Metodi kokoelmien lisäämistä varten.
+     * 
+     * @param k Lisättävä kokoelma
+     */
+    public void lisaaPalikoita(Palikkakokoelma k) {
+        palikat.add(k);
     }
 
     public void setAktiivinenPalikka(Palikkakokoelma aktiivinenPalikka) {
@@ -117,6 +143,5 @@ public class Pelilooppi extends Timer implements ActionListener {
     public AktiivisenPalikanHallinnoija getAktiivisenPalikanHallinnoija() {
         return aktiivisenHallinnoija;
     }
-    
-    
+
 }

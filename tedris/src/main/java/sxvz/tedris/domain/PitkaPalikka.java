@@ -3,8 +3,21 @@ package sxvz.tedris.domain;
 import java.awt.Color;
 import java.util.ArrayList;
 
+/**
+ * Neljän pituinen kokoelma, joka osaa kääntyä.
+ * 
+ * @see sxvz.tedris.domain.Palikkakokoelma
+ */
 public class PitkaPalikka extends Palikkakokoelma {
 
+    /**
+     * Konstruktori kokoelman luontia varten.
+     * Luo infon palikan kääntymistä varten.
+     * 
+     * @param vari Pelin asettama väri
+     * @param x X-koordinaati pääpalikalle
+     * @param y Y-koordinaatti pääpalikalle
+     */
     public PitkaPalikka(Color vari, int x, int y) {
         super(vari);
         palikat.add(new Palikka(x, y));
@@ -33,7 +46,13 @@ public class PitkaPalikka extends Palikkakokoelma {
         kaantymisInfo.get(3).add(new int[]{0, -1});
         kaantymisInfo.get(3).add(new int[]{0, -2});
     }
-
+    
+    /**
+     * Metodi, joka kääntää palikan kääntämisInfon ohjeiden mukaan.
+     * Ei tarkista onko esteitä.
+     * 
+     * @param kiertosuunta Kertoo kumpaan suuntaan palikkaa käännetään
+     */
     @Override
     public void kaanny(int kiertosuunta) {
         super.kaanny(kiertosuunta);

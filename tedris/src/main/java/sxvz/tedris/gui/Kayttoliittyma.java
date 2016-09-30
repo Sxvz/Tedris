@@ -7,18 +7,31 @@ import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 import sxvz.tedris.engine.Pelilooppi;
 
+/**
+ * Graafisen käyttöliittymän pohjaluokka, joka toimii kaiken perustana ja
+ * luo tarvittavat osat.
+ */
 public class Kayttoliittyma implements Runnable {
 
     private JFrame frame;
     private Pelilooppi peli;
     private int palikanKoko;
     private Piirtoalusta piirtoalusta;
-
+    
+    /**
+     * Konstruktori, jolla määritetään pelissä olevien palikoiden koko pikseleinä.
+     * 
+     * @param peli Pelilooppi piirtoalustaa varten
+     * @param palikanKoko Piirrettävän palikan koko pikseleinä
+     */
     public Kayttoliittyma(Pelilooppi peli, int palikanKoko) {
         this.peli = peli;
         this.palikanKoko = palikanKoko;
     }
 
+    /**
+     * Luo ikkunan ja sen komponentit pelille.
+     */
     @Override
     public void run() {
         frame = new JFrame("Tedris");
@@ -35,7 +48,7 @@ public class Kayttoliittyma implements Runnable {
         frame.setVisible(true);
     }
 
-    public void luoKomponentit(Container container) {
+    private void luoKomponentit(Container container) {
         piirtoalusta = new Piirtoalusta(peli, palikanKoko);
         container.add(piirtoalusta);
         frame.addKeyListener(new Nappaimistonkuuntelija(peli));
