@@ -2,7 +2,7 @@
 package sxvz.tedris.domain;
 
 /**
- * Perus palikka kokoelmiin sijoittamista varten.
+ * Peruspalikka kokoelmiin sijoittamista varten.
  * 
  * @see sxvz.tedris.domain.Palikkakokoelma
  */

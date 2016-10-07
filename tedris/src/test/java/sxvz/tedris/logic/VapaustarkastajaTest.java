@@ -4,27 +4,27 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import sxvz.tedris.domain.Debugkokoelma;
-import sxvz.tedris.domain.NelioPalikka;
+import sxvz.tedris.domain.NelioKokoelma;
 import sxvz.tedris.domain.Palikka;
-import sxvz.tedris.domain.PitkaPalikka;
+import sxvz.tedris.domain.Pelialue;
+import sxvz.tedris.domain.PitkaKokoelma;
 import sxvz.tedris.domain.Suunta;
-import sxvz.tedris.engine.Pelilooppi;
 
 public class VapaustarkastajaTest {
 
-    private Pelilooppi peli;
+    private Pelialue alue;
     private Debugkokoelma kokoelma;
     private Vapaustarkastaja tarkastaja;
 
     @Before
     public void setUp() {
-        peli = new Pelilooppi(20, 30);
+        alue = new Pelialue(20, 30);
         kokoelma = new Debugkokoelma();
-        tarkastaja = new Vapaustarkastaja(peli);
+        tarkastaja = new Vapaustarkastaja(alue);
         kokoelma.lisaaPalikka(new Palikka(4, 5));
 //        kokoelma.lisaaPalikka(new Palikka(7, 5));
         kokoelma.lisaaPalikka(new Palikka(5, 6));
-        peli.lisaaPalikoita(kokoelma);
+        alue.lisaaKokoelma(kokoelma);
     }
 
     @Test
@@ -59,6 +59,16 @@ public class VapaustarkastajaTest {
     }
     
     @Test
+    public void voikoLiikkuaToimiiKoordinaateilla() {
+        Palikka p = new Palikka(5, 5);
+
+        assertFalse(tarkastaja.voikoLiikkua(null, -1, 0));
+        assertFalse(tarkastaja.voikoLiikkua(null, 0, -1));
+        assertFalse(tarkastaja.voikoLiikkua(null, 21, 0));
+        assertFalse(tarkastaja.voikoLiikkua(null, 0, 30));
+    }
+    
+    @Test
     public void palikkaEiPoistuPelialueelta() {
         Palikka p = new Palikka(0, 30);
         Palikka p2 = new Palikka(20, 0);
@@ -70,35 +80,35 @@ public class VapaustarkastajaTest {
     
     @Test
     public void kieltaaKaantymisenJosTiellaSeina() {
-        PitkaPalikka k = new PitkaPalikka(null, 1, 0);
+        PitkaKokoelma k = new PitkaKokoelma(null, 1, 0);
 
         assertFalse(tarkastaja.voikoKokoelmaKaantya(k, 1));
     }
     
     @Test
     public void kieltaaKaantymisenJosTiellaPalikka() {
-        PitkaPalikka k = new PitkaPalikka(null, 5, 4);
+        PitkaKokoelma k = new PitkaKokoelma(null, 5, 4);
 
         assertFalse(tarkastaja.voikoKokoelmaKaantya(k, 1));
     }
     
     @Test
     public void salliiKaantymisenJosVapaata() {
-        PitkaPalikka k = new PitkaPalikka(null, 10, 10);
+        PitkaKokoelma k = new PitkaKokoelma(null, 10, 10);
 
         assertTrue(tarkastaja.voikoKokoelmaKaantya(k, 1));
     }
     
     @Test
     public void kieltaaKaantymisenJosInfoOnNull() {
-        NelioPalikka k = new NelioPalikka(null, 10, 10);
+        NelioKokoelma k = new NelioKokoelma(null, 10, 10);
 
         assertFalse(tarkastaja.voikoKokoelmaKaantya(k, 1));
     }
     
     @Test
     public void kaantumisenTutkijaEiHammennyRajojenYlityksista() {
-        PitkaPalikka k = new PitkaPalikka(null, 10, 10);
+        PitkaKokoelma k = new PitkaKokoelma(null, 10, 10);
 
         k.kaanny(1);
         k.kaanny(1);

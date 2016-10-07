@@ -5,47 +5,43 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 import sxvz.tedris.domain.Palikka;
 import sxvz.tedris.domain.Palikkakokoelma;
-import sxvz.tedris.engine.Pelilooppi;
+import sxvz.tedris.domain.Pelialue;
 
 /**
- * GUI:n osa, joka piirtää pelin tilanteen näytölle.
+ * GUI:n osa, joka piirtää pelitilanteen näytölle.
  * 
- * @see sxvz.tedris.engine.Pelilooppi
+ * @see sxvz.tedris.domain.Pelialue
  */
 public class Piirtoalusta extends JPanel implements Paivitettava {
 
-    private Pelilooppi peli;
+    private Pelialue alue;
     private int palikanKoko;
 
     /**
-     * Konstruktori, joka välittää palikan koo piirtämistä varten.
+     * Konstruktori, joka välittää palikan koon piirtämistä varten.
      * 
-     * @param peli
+     * @param alue Pelialue, jonka tilanne piirretään
      * @param palikanKoko Palikan sivun koko pikseleinä
      */
-    public Piirtoalusta(Pelilooppi peli, int palikanKoko) {
-        this.peli = peli;
+    public Piirtoalusta(Pelialue alue, int palikanKoko) {
+        this.alue = alue;
         this.palikanKoko = palikanKoko;
     }
 
     /**
      * Piirtää kaikki palikat näytölle.
      * 
-     * @param g 
+     * @param g Grafiikka, johon piirretään
      */
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         
-        if (peli.getAktiivinenPalikka() != null) {
-            piirraKokoelma(g, peli.getAktiivinenPalikka());
+        if (alue.getAktiivinenKokoelma() != null) {
+            piirraKokoelma(g, alue.getAktiivinenKokoelma());
         }
         
-        if (peli.getPalikat().isEmpty()) {
-            return;
-        }
-        
-        for (Palikkakokoelma kokoelma : peli.getPalikat()) {
+        for (Palikkakokoelma kokoelma : alue.getKokoelmat()) {
             piirraKokoelma(g, kokoelma);
         }
     }

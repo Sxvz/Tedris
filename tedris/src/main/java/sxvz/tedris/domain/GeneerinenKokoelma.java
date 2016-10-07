@@ -12,7 +12,7 @@ import java.awt.Color;
 public class GeneerinenKokoelma extends Palikkakokoelma {
 
     /**
-     * Perus konstruktori, joka luo tyhjän kokoelman.
+     * Peruskonstruktori, joka luo tyhjän kokoelman.
      * 
      * @param vari Alkuperäisestä kokoelmasta saatava väri
      */

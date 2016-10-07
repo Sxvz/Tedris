@@ -7,12 +7,6 @@ import sxvz.tedris.engine.Pelilooppi;
 
 
 public class PalikkaTest {
-    private Pelilooppi peli;
-    
-    @Before
-    public void setUp() {
-        peli = new Pelilooppi(20,30);
-    }
     
     @Test
     public void palikkaSaaLuodessaHalututKoordinaatit() {

@@ -4,53 +4,53 @@ import java.util.ArrayList;
 import sxvz.tedris.domain.GeneerinenKokoelma;
 import sxvz.tedris.domain.Palikka;
 import sxvz.tedris.domain.Palikkakokoelma;
+import sxvz.tedris.domain.Pelialue;
 import sxvz.tedris.domain.Suunta;
-import sxvz.tedris.engine.Pelilooppi;
+import sxvz.tedris.engine.Paivitettava;
 
 /**
  * Luokka, joka etsii ja tuhoaa täydet rivit pyydettäessä.
  * 
- * @see sxvz.tedris.engine.Pelilooppi
+ * @see sxvz.tedris.domain.Pelialue
  */
-public class TaysienRivienKasittelija {
+public class TaysienRivienKasittelija implements Paivitettava {
 
-    private Pelilooppi peli;
+    private Pelialue alue;
+    private Vapaustarkastaja tarkastaja;
 
     /**
-     * Luo yhteyden pelilooppiin.
+     * Luo yhteyden pelialueeseen ja vapaustarkastajaan.
      * 
-     * @param peli Pelilooppi
+     * @param alue Pelialue
+     * @param tarkastaja Vapaustarkastaja
      */
-    public TaysienRivienKasittelija(Pelilooppi peli) {
-        this.peli = peli;
+    public TaysienRivienKasittelija(Pelialue alue, Vapaustarkastaja tarkastaja) {
+        this.alue = alue;
+        this.tarkastaja = tarkastaja;
     }
 
-    /**
-     * Etsii täydet rivit.
-     * Jos täysiä rivejä löytyy ne tuhotaan ja palikat jaetaan uusiin kokoelmiin.
-     */
-    public void kasitteleTaydetRivit() {
+    private void kasitteleTaydetRivit() {
         ArrayList<Integer> taydetRivit = etsiTaydetRivit();
 
         if (!taydetRivit.isEmpty()) {
             tuhoaPalikatRivilta(taydetRivit);
             jaaKokoelmat();
-            pudotaPalikat();
+            pudotaKokoelmat();
         }
     }
 
     private ArrayList<Integer> etsiTaydetRivit() {
         ArrayList<Integer> taydetRivit = new ArrayList<>();
-        int[] palikatRivilla = new int[peli.getPelialueenKorkeus()];
+        int[] palikatRivilla = new int[alue.getKorkeus()];
 
-        for (Palikkakokoelma kokoelma : peli.getPalikat()) {
+        for (Palikkakokoelma kokoelma : alue.getKokoelmat()) {
             for (Palikka p : kokoelma.getPalikat()) {
                 palikatRivilla[p.getY()]++;
             }
         }
 
         for (int i = 0; i < palikatRivilla.length; i++) {
-            if (palikatRivilla[i] == peli.getPelialueenLeveys()) {
+            if (palikatRivilla[i] == alue.getLeveys()) {
                 taydetRivit.add(i);
             }
         }
@@ -60,7 +60,7 @@ public class TaysienRivienKasittelija {
 
     private void jaaKokoelmat() {
         ArrayList<Palikkakokoelma> uudet = new ArrayList<>();
-        for (Palikkakokoelma kokoelma : peli.getPalikat()) {
+        for (Palikkakokoelma kokoelma : alue.getKokoelmat()) {
             GeneerinenKokoelma uusi1 = new GeneerinenKokoelma(kokoelma.getVari());
             GeneerinenKokoelma uusi2 = new GeneerinenKokoelma(kokoelma.getVari());
             uusi1.lisaaPalikka(kokoelma.getPalikat().get(0));
@@ -77,7 +77,7 @@ public class TaysienRivienKasittelija {
                 uudet.add(uusi2);
             }
         }
-        peli.setPalikat(uudet);
+        alue.setKokoelmat(uudet);
     }
 
     private boolean onkoPalikkaKokoelmanVieressa(Palikkakokoelma k, Palikka p1) {
@@ -92,7 +92,7 @@ public class TaysienRivienKasittelija {
     }
 
     private void tuhoaPalikatRivilta(ArrayList<Integer> taydetRivit) {
-        for (Palikkakokoelma kokoelma : peli.getPalikat()) {
+        for (Palikkakokoelma kokoelma : alue.getKokoelmat()) {
             for (int i = 0; i < kokoelma.getPalikat().size(); i++) {
                 if (taydetRivit.contains(kokoelma.getPalikat().get(i).getY())) {
                     kokoelma.getPalikat().remove(i);
@@ -101,24 +101,34 @@ public class TaysienRivienKasittelija {
             }
         }
         ArrayList<Palikkakokoelma> tyhjat = new ArrayList<>();
-        for (Palikkakokoelma kokoelma : peli.getPalikat()) {
+        for (Palikkakokoelma kokoelma : alue.getKokoelmat()) {
             if (kokoelma.getPalikat().isEmpty()) {
                 tyhjat.add(kokoelma);
             }
         }
-        peli.getPalikat().removeAll(tyhjat);
+        alue.getKokoelmat().removeAll(tyhjat);
     }
 
-    private void pudotaPalikat() {
+    private void pudotaKokoelmat() {
         boolean jokinLiikkui = true;
         while (jokinLiikkui) {
             jokinLiikkui = false;
-            for (Palikkakokoelma kokoelma : peli.getPalikat()) {
-                if (peli.getVapaustarkastaja().voikoKokoelmaLiikkua(kokoelma, Suunta.ALAS)) {
+            for (Palikkakokoelma kokoelma : alue.getKokoelmat()) {
+                if (tarkastaja.voikoKokoelmaLiikkua(kokoelma, Suunta.ALAS)) {
                     kokoelma.liiku(Suunta.ALAS);
                     jokinLiikkui = true;
                 }
             }
         }
+    }
+
+    
+    /**
+     * Etsii täydet rivit.
+     * Jos täysiä rivejä löytyy ne tuhotaan ja palikat jaetaan uusiin kokoelmiin.
+     */
+    @Override
+    public void paivita() {
+        kasitteleTaydetRivit();
     }
 }

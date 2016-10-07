@@ -6,8 +6,8 @@ import java.util.ArrayList;
 /**
  * Luokka, johon kaikki ei-abstraktit kokoelmat perustuvat.
  * 
- * @see sxvz.tedris.domain.NelioPalikka
- * @see sxvz.tedris.domain.PitkaPalikka
+ * @see sxvz.tedris.domain.NelioKokoelma
+ * @see sxvz.tedris.domain.PitkaKokoelma
  * @see sxvz.tedris.domain.GeneerinenKokoelma
  */
 public abstract class Palikkakokoelma {
@@ -18,7 +18,7 @@ public abstract class Palikkakokoelma {
 
     /**
      * Konstruktori oliomuutujien alustusta varten.
-     * Tätä konstruktoria käytetään kaikissa tähän pohjautuvissa luokissa.
+     * Tätä konstruktoria käytetään kaikissa tähän luokkaan pohjautuvissa luokissa.
      * 
      * @param vari Kokoelmalle asetettava väri
      */
@@ -47,7 +47,7 @@ public abstract class Palikkakokoelma {
      * 
      * @param kiertosuunta Kertoo käännetäänkö kokoelmaa vasta- vai myötäpäivään
      * 
-     * @see sxvz.tedris.domain.PitkaPalikka
+     * @see sxvz.tedris.domain.PitkaKokoelma
      */
     public void kaanny(int kiertosuunta) {
         orientaatio += kiertosuunta;

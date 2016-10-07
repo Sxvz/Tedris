@@ -19,7 +19,7 @@ public class Debugkokoelma extends Palikkakokoelma {
     }
     
     /**
-     * Konstruktori kaksi palikkaisen testikokoelman luontiin.
+     * Konstruktori kaksipalikkaisen testikokoelman luontiin.
      * 
      * @param p Kokoelmaan sijoitettavaa palikka
      * @param p2 Kokoelmaan sijoitettavaa palikka
@@ -31,7 +31,7 @@ public class Debugkokoelma extends Palikkakokoelma {
     }
     
     /**
-     * Mahdollistaa helpon palikoiden lisäämisen kokoelmaan luonnin jälkeen
+     * Mahdollistaa helpon palikoiden lisäämisen kokoelmaan luonnin jälkeen.
      * 
      * @param p lisättävä palikka
      */
@@ -41,7 +41,7 @@ public class Debugkokoelma extends Palikkakokoelma {
     
     /**
      * Poistaa kokoelman aiemman sisällön ja täytää sen uudestaan palikoilla,
-     * jotka täyttävät kokonaisen rivin defaultti kokoisessa pelissä.
+     * jotka täyttävät kokonaisen rivin defaulttikokoisessa pelissä.
      * Täysin testejä varten.
      * 
      * @param y y-koordinaatti uusille palikoille

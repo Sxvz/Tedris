@@ -2,29 +2,29 @@ package sxvz.tedris.logic;
 
 import sxvz.tedris.domain.Palikka;
 import sxvz.tedris.domain.Palikkakokoelma;
+import sxvz.tedris.domain.Pelialue;
 import sxvz.tedris.domain.Suunta;
-import sxvz.tedris.engine.Pelilooppi;
 
 /**
- * Huolehtii siitä, että palikat eivät poistu pelialueelta tai mene päällekkäin.
+ * Huolehtii siitä, että kokoelmat eivät poistu pelialueelta tai mene päällekkäin.
  * 
- * @see sxvz.tedris.engine.Pelilooppi
+ * @see sxvz.tedris.domain.Pelialue
  */
 public class Vapaustarkastaja {
 
-    private Pelilooppi peli;
+    private Pelialue alue;
     private int pelialueenKorkeus;
     private int pelialueenLeveys;
 
     /**
      * Antaa yhteyden pelilooppiin ja välittää pelialueen koon.
      * 
-     * @param peli 
+     * @param alue Pelialue, jonka perusteella tarkistukset suoritetaan
      */
-    public Vapaustarkastaja(Pelilooppi peli) {
-        this.peli = peli;
-        pelialueenKorkeus = peli.getPelialueenKorkeus();
-        pelialueenLeveys = peli.getPelialueenLeveys();
+    public Vapaustarkastaja(Pelialue alue) {
+        this.alue = alue;
+        pelialueenKorkeus = alue.getKorkeus();
+        pelialueenLeveys = alue.getLeveys();
     }
 
     /**
@@ -86,7 +86,7 @@ public class Vapaustarkastaja {
             return false;
         }
 
-        for (Palikkakokoelma palikkakokoelma : peli.getPalikat()) {
+        for (Palikkakokoelma palikkakokoelma : alue.getKokoelmat()) {
             if (palikkakokoelma.equals(liikkuvanKokoelma)) {
                 continue;
             }
@@ -102,14 +102,14 @@ public class Vapaustarkastaja {
     
     /**
      * Kertoo voiko kokoelma kääntyä esteettä.
-     * Lukee kääntymiseen vaadittavat paikat palikan kääntymisinfosta.
+     * Lukee kääntymiseen vaadittavat paikat kokoelman kääntymisinfosta.
      * Positiivinen kiertosuunta vastaa myötäpäivään kääntymistä ja negatiivinen
      * vastapäivään kääntymistä.
      * 
      * @param k Käännettävä kokoelma
      * @param kiertosuunta Haluttu kiertosuunta
      * 
-     * @return Onko kääntyminen mahdolista
+     * @return Onko kääntyminen mahdollista
      */
     public boolean voikoKokoelmaKaantya(Palikkakokoelma k, int kiertosuunta) {
         if (k.getKaantymisInfo() == null) {

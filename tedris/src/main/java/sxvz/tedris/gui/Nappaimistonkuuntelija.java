@@ -2,23 +2,33 @@ package sxvz.tedris.gui;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import sxvz.tedris.domain.Pelialue;
 import sxvz.tedris.domain.Suunta;
+import sxvz.tedris.engine.Paivitettava;
 import sxvz.tedris.engine.Pelilooppi;
+import sxvz.tedris.logic.Vapaustarkastaja;
 
 /**
  * Luokka, joka huolehtii näppäin-inputtien kuuntelusta.
  */
 public class Nappaimistonkuuntelija implements KeyListener {
 
-    private Pelilooppi peli;
+    private Pelialue alue;
+    private Pelilooppi looppi;
+    private Vapaustarkastaja tarkastaja;
+    private Paivitettava paivitettava;
 
     /**
-     * Konstruktori, joka luo kuuntelijalle yhteyden pelilooppiin.
+     * Konstruktori, joka luo kuuntelijalle tarvittavat yhteydet.
      * 
-     * @param peli Pelilooppi
+     * @param alue Pelialue, jossa liikkuminen tapahtuu
+     * @param looppi Pelilooppi, joka pausetetaan tarvittaessa
+     * @param tarkastaja Vapaustarkastaja
      */
-    public Nappaimistonkuuntelija(Pelilooppi peli) {
-        this.peli = peli;
+    public Nappaimistonkuuntelija(Pelialue alue, Pelilooppi looppi, Vapaustarkastaja tarkastaja) {
+        this.alue = alue;
+        this.looppi = looppi;
+        this.tarkastaja = tarkastaja;
     }
 
     @Override
@@ -26,17 +36,18 @@ public class Nappaimistonkuuntelija implements KeyListener {
     }
     
     /**
-     * Käsittelee näppäimistön painallukset ja liikuttaa aktiivista palikkaa
-     * sen mukaan. Tarkistaa onko liikkuminen sallittua.
-     * Q- ja E-näppäimet kääntävät aktiivista palikkaa.
-     * A-, S, ja D-näppäimet liikuttelevat aktiivista palikkaa sivuille ja alas.
+     * Käsittelee näppäimistön painallukset ja liikuttaa aktiivista kokoelmaa
+     * painetun näppäimen perusteella. Tarkistaa onko liikkuminen sallittua.
+     * Päivittää ruudun liikkumisen jälkeen.
+     * Q- ja E-näppäimet kääntävät aktiivista kokoelmaa.
+     * A-, S, ja D-näppäimet liikuttelevat aktiivista kokoelmaa sivuille ja alas.
      * W-näppäin laittaa tauon päälle.
      * 
      * @param e Näppäimistöstä tuleva inputti
      */
     @Override
     public void keyPressed(KeyEvent e) {
-        if (peli.getAktiivinenPalikka() == null) {
+        if (alue.getAktiivinenKokoelma() == null) {
             return;
         }
 
@@ -60,24 +71,29 @@ public class Nappaimistonkuuntelija implements KeyListener {
     }
 
     private void pause() {
-        if (peli.isPeliKaynnissa()) {
-            peli.setPeliKaynnissa(false);
+        if (looppi.isRunning()) {
+            looppi.stop();
         } else {
-            peli.setPeliKaynnissa(true);
-            peli.setInitialDelay(100);
-            peli.start();
+            looppi.setInitialDelay(100);
+            looppi.start();
         }
     }
 
     private void tarkistaJaLiikuta(Suunta s) {
-        if (peli.getVapaustarkastaja().voikoKokoelmaLiikkua(peli.getAktiivinenPalikka(), s)) {
-            peli.getAktiivinenPalikka().liiku(s);
+        if (tarkastaja.voikoKokoelmaLiikkua(alue.getAktiivinenKokoelma(), s)) {
+            alue.getAktiivinenKokoelma().liiku(s);
         }
+        paivitettava.paivita();
     }
 
     private void tarkistaJaKaanna(int kiertosuunta) {
-        if (peli.getVapaustarkastaja().voikoKokoelmaKaantya(peli.getAktiivinenPalikka(), kiertosuunta)) {
-            peli.getAktiivinenPalikka().kaanny(kiertosuunta);
+        if (tarkastaja.voikoKokoelmaKaantya(alue.getAktiivinenKokoelma(), kiertosuunta)) {
+            alue.getAktiivinenKokoelma().kaanny(kiertosuunta);
         }
+        paivitettava.paivita();
+    }
+    
+    public void setPaivitettava(Paivitettava paivitettava) {
+        this.paivitettava = paivitettava;
     }
 }
