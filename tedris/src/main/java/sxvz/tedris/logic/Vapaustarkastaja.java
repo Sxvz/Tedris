@@ -116,10 +116,8 @@ public class Vapaustarkastaja {
             return false;
         }
         
-        Palikka p;
         int haettavaKaantymisInfo;
         for (int i = 1; i < 4; i++) {
-            p = k.getPalikat().get(i);
             haettavaKaantymisInfo = k.getOrientaatio() + kiertosuunta;
             
             if (haettavaKaantymisInfo > 3) {

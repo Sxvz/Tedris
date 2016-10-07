@@ -12,6 +12,7 @@ import sxvz.tedris.engine.Paivitettava;
  * Luokka, joka etsii ja tuhoaa täydet rivit pyydettäessä.
  * 
  * @see sxvz.tedris.domain.Pelialue
+ * @see sxvz.tedris.logic.Vapaustarkastaja
  */
 public class TaysienRivienKasittelija implements Paivitettava {
 

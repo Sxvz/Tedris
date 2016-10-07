@@ -8,6 +8,7 @@ Päivä | Tunnit | Kuvaus
 26.09.2016 | 2h | Edellisten fiksausta
 30.09.2016 | 5h | Edellisten fiksausta ja palikoiden kääntymistä sekä testeja
 30.09.2016 | 3h | Javadoc ja luokkakaavio
-6.10.2016 | 0,5h | Refactorointia
-7.10.2016 | 3h | Refactorointia, testejä ja pluginien configurointia
+6.10.2016 | 1h | Refactorointia (Yleistä siistintää ja käsitteiden yhtenäistämistä)
+7.10.2016 | 3h | Refactoriontia (Peliloopin ja pelialueen eriyttäminen), testejä ja pluginien configurointia
+7.10.2016 | 4h | Kaavioita, raporteja ja JavaDoccia
 

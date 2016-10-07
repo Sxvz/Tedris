@@ -14,6 +14,7 @@ import sxvz.tedris.engine.Paivitettava;
  * Luokka, joka huolehtii aktiivisesta kokoelmasta.
  *
  * @see sxvz.tedris.domain.Pelialue
+ * @see sxvz.tedris.logic.Vapaustarkastaja
  */
 public class AktiivisenKokoelmanHallinnoija implements Paivitettava {
 

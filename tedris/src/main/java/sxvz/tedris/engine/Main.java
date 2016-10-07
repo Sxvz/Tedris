@@ -13,6 +13,11 @@ import sxvz.tedris.logic.Vapaustarkastaja;
  * Huolehtii pelin välttämättömyyksien luomisesta ja peliloopin käynnistämisestä.
  * 
  * @see sxvz.tedris.engine.Pelilooppi
+ * @see sxvz.tedris.domain.Pelialue
+ * @see sxvz.tedris.gui.Nappaimistonkuuntelija
+ * @see sxvz.tedris.logic.Vapaustarkastaja
+ * @see sxvz.tedris.logic.AktiivisenKokoelmanHallinnoija
+ * @see sxvz.tedris.logic.TaysienRivienKasittelija
  */
 public class Main {
     /**
