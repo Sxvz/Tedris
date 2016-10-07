@@ -17,5 +17,6 @@ Piste- ja menusysteemi lisätään, jos aikaa jää.
 
 ###Luokkakaavio
 ![Luokkakaavio](luokkakaavio.png)
+###Sekvenssikaavioita
 ![Sekvenssikaavio_liikkuminen](liikkuminen_sequence.png)
 ![Sekvenssikaavio_kaantyminen](kaantyminen_sequence.png)

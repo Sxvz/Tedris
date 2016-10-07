@@ -10,5 +10,5 @@ Päivä | Tunnit | Kuvaus
 30.09.2016 | 3h | Javadoc ja luokkakaavio
 6.10.2016 | 1h | Refactorointia (Yleistä siistintää ja käsitteiden yhtenäistämistä)
 7.10.2016 | 3h | Refactoriontia (Peliloopin ja pelialueen eriyttäminen), testejä ja pluginien configurointia
-7.10.2016 | 4h | Kaavioita, raporteja ja JavaDoccia
+7.10.2016 | 4,5h | Kaavioita, raporteja ja JavaDoccia
 
