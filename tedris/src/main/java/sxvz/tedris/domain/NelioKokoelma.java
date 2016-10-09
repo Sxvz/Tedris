@@ -28,12 +28,4 @@ public class NelioKokoelma extends Palikkakokoelma {
 
     }
 
-    /**
-     * Metodi, joka varmistaa kokoelman kääntymättömyyden.
-     * 
-     * @param kiertosuunta Ei tee mitään tässä palikassa
-     */
-    @Override
-    public void kaanny(int kiertosuunta) {
-    }
 }

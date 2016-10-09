@@ -3,11 +3,16 @@ package sxvz.tedris.logic;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
+import sxvz.tedris.domain.KaanteinenLKokoelma;
+import sxvz.tedris.domain.KaanteinenPorrasKokoelma;
+import sxvz.tedris.domain.LKokoelma;
 import sxvz.tedris.domain.NelioKokoelma;
 import sxvz.tedris.domain.Palikkakokoelma;
 import sxvz.tedris.domain.Pelialue;
 import sxvz.tedris.domain.PitkaKokoelma;
+import sxvz.tedris.domain.PorrasKokoelma;
 import sxvz.tedris.domain.Suunta;
+import sxvz.tedris.domain.TKokoelma;
 import sxvz.tedris.engine.Paivitettava;
 
 /**
@@ -63,13 +68,23 @@ public class AktiivisenKokoelmanHallinnoija implements Paivitettava {
     private Palikkakokoelma luoUusiPalikka() {
         Color vari = varit.get(random.nextInt(varit.size()));
         int x = alue.getLeveys() / 2;
-        int i = random.nextInt(2);
+        int i = random.nextInt(7);
 
         switch (i) {
             case 0:
                 return new PitkaKokoelma(vari, x, 0);
             case 1:
                 return new NelioKokoelma(vari, x, 0);
+            case 2:
+                return new LKokoelma(vari, x, 1);
+            case 3:
+                return new KaanteinenLKokoelma(vari, x, 0);
+            case 4:
+                return new PorrasKokoelma(vari, x , 1);
+            case 5:
+                return new KaanteinenPorrasKokoelma(vari, x , 1);
+            case 6:
+                return new TKokoelma(vari, x, 0);
         }
 
         return null;

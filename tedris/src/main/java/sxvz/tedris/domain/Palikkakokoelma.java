@@ -5,21 +5,22 @@ import java.util.ArrayList;
 
 /**
  * Luokka, johon kaikki ei-abstraktit kokoelmat perustuvat.
- * 
+ *
  * @see sxvz.tedris.domain.NelioKokoelma
  * @see sxvz.tedris.domain.PitkaKokoelma
  * @see sxvz.tedris.domain.GeneerinenKokoelma
  */
 public abstract class Palikkakokoelma {
+
     protected ArrayList<Palikka> palikat;
     protected Color vari;
     protected int orientaatio;
     protected ArrayList<ArrayList<int[]>> kaantymisInfo;
 
     /**
-     * Konstruktori oliomuutujien alustusta varten.
-     * Tätä konstruktoria käytetään kaikissa tähän luokkaan pohjautuvissa luokissa.
-     * 
+     * Konstruktori oliomuutujien alustusta varten. Tätä konstruktoria käytetään
+     * kaikissa tähän luokkaan pohjautuvissa luokissa.
+     *
      * @param vari Kokoelmalle asetettava väri
      */
     public Palikkakokoelma(Color vari) {
@@ -28,11 +29,10 @@ public abstract class Palikkakokoelma {
         orientaatio = 0;
         kaantymisInfo = new ArrayList<>();
     }
-    
+
     /**
-     * Metodi, joka liikuttaa koko kokoelmaa.
-     * Ei tarkista onko tiellä jotakin.
-     * 
+     * Metodi, joka liikuttaa koko kokoelmaa. Ei tarkista onko tiellä jotakin.
+     *
      * @param s Kertoo suunnan johon liikutaan
      */
     public void liiku(Suunta s) {
@@ -42,12 +42,10 @@ public abstract class Palikkakokoelma {
     }
 
     /**
-     * Metodi, joka huolehtii kokoelman orientaatiosta.
-     * Suoritetaan muissa kokoelmissa ennen itse kokoelman kääntävää osaa.
+     * Metodi, joka kääntää kokoelman kääntämisInfon ohjeiden mukaan.
+     * Ei tarkista onko esteitä.
      * 
-     * @param kiertosuunta Kertoo käännetäänkö kokoelmaa vasta- vai myötäpäivään
-     * 
-     * @see sxvz.tedris.domain.PitkaKokoelma
+     * @param kiertosuunta Kertoo kumpaan suuntaan kokoelmaa käännetään
      */
     public void kaanny(int kiertosuunta) {
         orientaatio += kiertosuunta;
@@ -56,8 +54,20 @@ public abstract class Palikkakokoelma {
         } else if (orientaatio > 3) {
             orientaatio = 0;
         }
+
+        if (kaantymisInfo == null) {
+            return;
+        }
+
+        int x = palikat.get(0).getX();
+        int y = palikat.get(0).getY();
+
+        for (int i = 1; i < 4; i++) {
+            palikat.get(i).liiku(x + kaantymisInfo.get(orientaatio).get(i - 1)[0], y + kaantymisInfo.get(orientaatio).get(i - 1)[1]);
+
+        }
     }
-    
+
     public ArrayList<ArrayList<int[]>> getKaantymisInfo() {
         return kaantymisInfo;
     }

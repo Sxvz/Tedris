@@ -11,4 +11,4 @@ Päivä | Tunnit | Kuvaus
 6.10.2016 | 1h | Refactorointia (Yleistä siistintää ja käsitteiden yhtenäistämistä)
 7.10.2016 | 3h | Refactoriontia (Peliloopin ja pelialueen eriyttäminen), testejä ja pluginien configurointia
 7.10.2016 | 4,5h | Kaavioita, raporteja ja JavaDoccia
-
+9.10.2016 | 1h | Lisätty loput palikat ja korjaus luokkakaavioon

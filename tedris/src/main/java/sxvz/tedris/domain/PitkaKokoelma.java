@@ -46,21 +46,5 @@ public class PitkaKokoelma extends Palikkakokoelma {
         kaantymisInfo.get(3).add(new int[]{0, -1});
         kaantymisInfo.get(3).add(new int[]{0, -2});
     }
-    
-    /**
-     * Metodi, joka kääntää kokoelman kääntämisInfon ohjeiden mukaan.
-     * Ei tarkista onko esteitä.
-     * 
-     * @param kiertosuunta Kertoo kumpaan suuntaan kokoelmaa käännetään
-     */
-    @Override
-    public void kaanny(int kiertosuunta) {
-        super.kaanny(kiertosuunta);
-        int x = palikat.get(0).getX();
-        int y = palikat.get(0).getY();
 
-        for (int i = 1; i < 4; i++) {
-            palikat.get(i).liiku(x + kaantymisInfo.get(orientaatio).get(i - 1)[0], y + kaantymisInfo.get(orientaatio).get(i - 1)[1]);
-        }
-    }
 }
