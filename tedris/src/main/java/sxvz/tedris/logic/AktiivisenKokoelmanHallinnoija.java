@@ -14,29 +14,36 @@ import sxvz.tedris.domain.PorrasKokoelma;
 import sxvz.tedris.domain.Suunta;
 import sxvz.tedris.domain.TKokoelma;
 import sxvz.tedris.engine.Paivitettava;
+import sxvz.tedris.gui.SeuraavanPiirtaja;
 
 /**
- * Luokka, joka huolehtii aktiivisesta kokoelmasta.
+ * Luokka, joka huolehtii aktiivisesta kokoelmasta. Välittää seuraavan kokoelman
+ * näytettäväksi.
  *
  * @see sxvz.tedris.domain.Pelialue
  * @see sxvz.tedris.logic.Vapaustarkastaja
+ * @see sxvz.tedris.gui.SeuraavanPiirtaja
  */
 public class AktiivisenKokoelmanHallinnoija implements Paivitettava {
 
     private Pelialue alue;
     private Vapaustarkastaja tarkastaja;
+    private SeuraavanPiirtaja seuraavanPiirtaja;
     private Random random;
     private ArrayList<Color> varit;
+    private Palikkakokoelma seuraavaKokoelma;
 
     /**
      * Alustaa tarvittavat muuttujat ja määrittää mahdolliset palikan värit.
      *
      * @param alue Pelialue
      * @param tarkastaja Luokka, joka hoitaa törmäyksenvalvonnan
+     * @param seuraavanPiirtaja Luokka, joka piirtää seuraavan kokoelman
      */
-    public AktiivisenKokoelmanHallinnoija(Pelialue alue, Vapaustarkastaja tarkastaja) {
+    public AktiivisenKokoelmanHallinnoija(Pelialue alue, Vapaustarkastaja tarkastaja, SeuraavanPiirtaja piirtaja) {
         this.alue = alue;
         this.tarkastaja = tarkastaja;
+        seuraavanPiirtaja = piirtaja;
         random = new Random();
         varit = new ArrayList<>();
         varit.add(Color.BLUE);
@@ -51,8 +58,13 @@ public class AktiivisenKokoelmanHallinnoija implements Paivitettava {
     private void hallinnoiAktiivistaKokoelmaa() {
         Palikkakokoelma aktiivinen = alue.getAktiivinenKokoelma();
 
+        if (seuraavaKokoelma == null) {
+            luoSeuraavaKokoelma();
+        }
+
         if (aktiivinen == null) {
-            alue.setAktiivinenKokoelma(luoUusiPalikka());
+            alue.setAktiivinenKokoelma(seuraavaKokoelma);
+            luoSeuraavaKokoelma();
         } else {
             boolean liikkuminenOnnistuu = tarkastaja.voikoKokoelmaLiikkua(aktiivinen, Suunta.ALAS);
 
@@ -65,7 +77,15 @@ public class AktiivisenKokoelmanHallinnoija implements Paivitettava {
         }
     }
 
-    private Palikkakokoelma luoUusiPalikka() {
+    private void luoSeuraavaKokoelma() {
+        seuraavaKokoelma = luoUusiKokoelma();
+        if (seuraavanPiirtaja != null) {
+            seuraavanPiirtaja.setSeuraavaKokoelma(seuraavaKokoelma);
+            seuraavanPiirtaja.paivita();
+        }
+    }
+
+    private Palikkakokoelma luoUusiKokoelma() {
         Color vari = varit.get(random.nextInt(varit.size()));
         int x = alue.getLeveys() / 2;
         int i = random.nextInt(7);
@@ -80,9 +100,9 @@ public class AktiivisenKokoelmanHallinnoija implements Paivitettava {
             case 3:
                 return new KaanteinenLKokoelma(vari, x, 0);
             case 4:
-                return new PorrasKokoelma(vari, x , 1);
+                return new PorrasKokoelma(vari, x, 1);
             case 5:
-                return new KaanteinenPorrasKokoelma(vari, x , 1);
+                return new KaanteinenPorrasKokoelma(vari, x, 1);
             case 6:
                 return new TKokoelma(vari, x, 0);
         }

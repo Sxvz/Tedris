@@ -44,7 +44,7 @@ public class Main {
         }
 
         kuuntelija.setPaivitettava(kali.getPaivitettava());
-        looppi.lisaaPaivitettava(new AktiivisenKokoelmanHallinnoija(alue, tarkastaja));
+        looppi.lisaaPaivitettava(new AktiivisenKokoelmanHallinnoija(alue, tarkastaja, kali.getSeuraavanPiirtaja()));
         looppi.lisaaPaivitettava(new TaysienRivienKasittelija(alue, tarkastaja));
         looppi.lisaaPaivitettava(kali.getPaivitettava());
         looppi.start();

@@ -17,7 +17,7 @@ public class AktiivisenKokoelmanHallinnoijaTest {
     public void setUp() {
         alue = new Pelialue(20, 30);
         tarkastaja = new Vapaustarkastaja(alue);
-        hallinnoija = new AktiivisenKokoelmanHallinnoija(alue, tarkastaja);
+        hallinnoija = new AktiivisenKokoelmanHallinnoija(alue, tarkastaja, null);
     }
 
     @Test

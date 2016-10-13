@@ -14,8 +14,8 @@ import sxvz.tedris.domain.Pelialue;
  */
 public class Piirtoalusta extends JPanel implements Paivitettava {
 
-    private Pelialue alue;
-    private int palikanKoko;
+    protected Pelialue alue;
+    protected int palikanKoko;
 
     /**
      * Konstruktori, joka välittää palikan koon piirtämistä varten.
@@ -46,7 +46,7 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
         }
     }
 
-    private void piirraKokoelma(Graphics g, Palikkakokoelma kokoelma) {
+    protected void piirraKokoelma(Graphics g, Palikkakokoelma kokoelma) {
         g.setColor(kokoelma.getVari());
         for (Palikka p : kokoelma.getPalikat()) {
             g.fillRect(p.getX() * palikanKoko, p.getY() * palikanKoko, palikanKoko, palikanKoko);
