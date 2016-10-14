@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 /**
- * Portaan muotoinen kokoelma, joka osaa kääntyä.
+ * Portaanmuotoinen kokoelma, joka osaa kääntyä.
  * 
  * @see sxvz.tedris.domain.Palikkakokoelma
  */

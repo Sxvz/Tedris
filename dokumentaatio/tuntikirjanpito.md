@@ -14,3 +14,5 @@ Päivä | Tunnit | Kuvaus
 9.10.2016 | 1h | Lisätty loput palikat ja korjaus luokkakaavioon
 10.10.2016 | 1h | GUI:n jatkosuunnittelua
 13.10.2016 | 2h | GUI:n jatkosuunnittelua ja toteutusta
+14.10.2016 | 5,5h | Sivupaneelin viimeistely ja toiminnallisuus, game over, alustuskoodin refactorointi (vanha vielä tallessa), pisteenlaskenta
+

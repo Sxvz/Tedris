@@ -17,7 +17,7 @@ public class Vapaustarkastaja {
     private int pelialueenLeveys;
 
     /**
-     * Antaa yhteyden pelilooppiin ja välittää pelialueen koon.
+     * Antaa yhteyden pelialueeseen.
      * 
      * @param alue Pelialue, jonka perusteella tarkistukset suoritetaan
      */
@@ -28,7 +28,7 @@ public class Vapaustarkastaja {
     }
 
     /**
-     * Kertoo voiko kokonainen kokoelma liikkua johonkin suuntaan.
+     * Kertoo voiko kokonainen kokoelma liikkua haluttuun suuntaan.
      * 
      * @param k Liikutettava kokoelma
      * @param s Haluttu suunta
@@ -45,9 +45,9 @@ public class Vapaustarkastaja {
     }
 
     /**
-     * Kertoo voiko yksittäinen palikka liikkua. Parametrinä oleva kokoelma
-     * välitetään kutsuttavalle metodille. Tämän kokoelman palikat eivät estä
-     * liikkumista.
+     * Kertoo voiko yksittäinen palikka liikkua haluttuun suuntaan.
+     * Parametrinä oleva kokoelma välitetään kutsuttavalle metodille.
+     * Tämän kokoelman palikat eivät estä liikkumista.
      * 
      * @param k Kokoelma, joka ei estä liikkumista
      * @param p Palikka, jota liikutetaan
@@ -72,7 +72,7 @@ public class Vapaustarkastaja {
     /**
      * Kertoo voiko palikka liikkua annettuihin koordinaatteihin.
      * Jos parametrinä annetaan kokoelma, kyseisen kokoelman palikat eivät
-     * setä liikkumista.
+     * estä liikkumista.
      * 
      * @param liikkuvanKokoelma Liikutettavan palikan kokoelma
      * @param x Kohde x-koordinaatti

@@ -1,6 +1,6 @@
 **Aihe:** Tetriksen kaltainen peli, jossa kontrolloidaan putoilevia palikoita. Tarkoituksena on siis luoda ohjelma, joka pudottelee satunnaisesti valittuja palikoita pelaajan hallittavaksi. Pelaaja tällöin pyrkii ohjaamaan ja kääntelemään palikoita siten, että putoavat palikat muodostavat täysiä rivejä pelialueen reunasta reunaan. Tällöin rivi poistetaan, jäljellä olevia palikoita liikutetaan alaspäin ja pelaajalle annetaan pisteitä (mahdollisesti myös combopisteitä useamman rivin täyttyessä samaan aikaan). Pelin häviää jos pelaajan kasaama palikkapino ylittää pelialueen ylärajan. Pelin päättyessä pelaajalta kysytään nimikirjaimia ja pistetulos tallennetaan highscorea varten.
 
-Piste- ja menusysteemi lisätään, jos aikaa jää.
+Highscore-systeemi lisätään, jos aikaa jää.
 
 **Käyttäjä:** Pelaaja
 
@@ -17,6 +17,18 @@ Piste- ja menusysteemi lisätään, jos aikaa jää.
 
 ###Luokkakaavio
 ![Luokkakaavio](luokkakaavio.png)
+
+Selkeyden vuoksi luokkakaavioon ei ole merkitty Main-luokkaa, joka luo lähes kaikki muut luokat. Luonnin jälkeen vastuu pelistä jätetään GUI:ssa olevalle NapinKuuntelijalle, joka käynnistää PelitilanHallinnoijan kautta peliloopin.
+
+Itse pelin pyörimisen aikana päävastuu on Peliloopilla, joka päivittää Paivitettava-interfacen toteuttavia luokkia ja Nappaimistonkuuntelijalla, joka ottaa inputteja vastaan sekä omalta osaltaan päivittää Piirtoalustaa.
+
+Pelaajan hallinnassa olevan kokoelman liikkuessa Nappaimistonkuuntelija ja AktiivisenKokoelmanHallinnoija varmistavat tarvittaessa luukuttelun olevan sallittua.
+
+Täysien rivien muodostuessa TaysienRivienKasittelija tuohoaa Pelialueelta niillä olevat Palikat ja raportoi tuhotuista palikoista PisteenLaskennalle.
+Lopuksi TaysienRivienKasittelija pudottaa ilmaan jääneet kokoelmat Vapaustarkastajan avulla.
+
+Peli päättyy, kun AktiivisenKokoelmanHallinnoija tai pelaaja painaa Luovuta-nappia (NapinKuuntelija), jolloin PelitilanHallinnoija pysäyttää Peliloopin.
+
 ###Sekvenssikaavioita
 ![Sekvenssikaavio_liikkuminen](liikkuminen_sequence.png)
 ![Sekvenssikaavio_kaantyminen](kaantyminen_sequence.png)

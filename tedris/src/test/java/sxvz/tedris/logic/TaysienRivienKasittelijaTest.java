@@ -12,13 +12,15 @@ public class TaysienRivienKasittelijaTest {
     private Vapaustarkastaja tarkastaja;
     private Debugkokoelma kokoelma;
     private TaysienRivienKasittelija kasittelija;
+    private Pisteenlaskenta laskenta;
 
     @Before
     public void setUp() {
         alue = new Pelialue(20, 30);
         tarkastaja = new Vapaustarkastaja(alue);
         kokoelma = new Debugkokoelma();
-        kasittelija = new TaysienRivienKasittelija(alue, tarkastaja);
+        laskenta = new Pisteenlaskenta(20);
+        kasittelija = new TaysienRivienKasittelija(alue, tarkastaja, laskenta);
         kokoelma.rivinLevyinenPalikka(3);
         alue.lisaaKokoelma(kokoelma);
     }
@@ -28,6 +30,13 @@ public class TaysienRivienKasittelijaTest {
         kasittelija.paivita();
         
         assertEquals(0, alue.getKokoelmat().size());
+    }
+    
+    @Test
+    public void taysiRiviPisteytetaan() {
+        kasittelija.paivita();
+        
+        assertTrue(0 < laskenta.getPisteet());
     }
     
     @Test

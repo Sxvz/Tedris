@@ -25,8 +25,16 @@ public class PelialueTest {
     @Test
     public void pelialueellePystyyLisaamaanKokoelmia() {
         alue.lisaaKokoelma(new NelioKokoelma(null, 10, 10));
-        
+
         assertEquals(1, alue.getKokoelmat().size());
+    }
+
+    @Test
+    public void pelialueTyhjenee() {
+        alue.lisaaKokoelma(new Debugkokoelma());
+        alue.tyhjenna();
+
+        assertEquals(0, alue.getKokoelmat().size());
     }
 
 }

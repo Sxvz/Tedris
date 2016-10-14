@@ -5,7 +5,7 @@ import java.awt.event.KeyListener;
 import sxvz.tedris.domain.Pelialue;
 import sxvz.tedris.domain.Suunta;
 import sxvz.tedris.engine.Paivitettava;
-import sxvz.tedris.engine.Pelilooppi;
+import sxvz.tedris.logic.PelitilanHallinnoija;
 import sxvz.tedris.logic.Vapaustarkastaja;
 
 /**
@@ -14,7 +14,7 @@ import sxvz.tedris.logic.Vapaustarkastaja;
 public class Nappaimistonkuuntelija implements KeyListener {
 
     private Pelialue alue;
-    private Pelilooppi looppi;
+    private PelitilanHallinnoija pelitilanHallinnoija;
     private Vapaustarkastaja tarkastaja;
     private Paivitettava paivitettava;
 
@@ -22,12 +22,12 @@ public class Nappaimistonkuuntelija implements KeyListener {
      * Konstruktori, joka luo kuuntelijalle tarvittavat yhteydet.
      * 
      * @param alue Pelialue, jossa liikkuminen tapahtuu
-     * @param looppi Pelilooppi, joka pausetetaan tarvittaessa
+     * @param pelitilanHallinnoija Luokka, joka huolehtii pausetuksesta
      * @param tarkastaja Vapaustarkastaja
      */
-    public Nappaimistonkuuntelija(Pelialue alue, Pelilooppi looppi, Vapaustarkastaja tarkastaja) {
+    public Nappaimistonkuuntelija(Pelialue alue, PelitilanHallinnoija pelitilanHallinnoija, Vapaustarkastaja tarkastaja) {
         this.alue = alue;
-        this.looppi = looppi;
+        this.pelitilanHallinnoija = pelitilanHallinnoija;
         this.tarkastaja = tarkastaja;
     }
 
@@ -71,23 +71,18 @@ public class Nappaimistonkuuntelija implements KeyListener {
     }
 
     private void pause() {
-        if (looppi.isRunning()) {
-            looppi.stop();
-        } else {
-            looppi.setInitialDelay(100);
-            looppi.start();
-        }
+        pelitilanHallinnoija.pause();
     }
 
     private void tarkistaJaLiikuta(Suunta s) {
-        if (tarkastaja.voikoKokoelmaLiikkua(alue.getAktiivinenKokoelma(), s)) {
+        if (tarkastaja.voikoKokoelmaLiikkua(alue.getAktiivinenKokoelma(), s) && pelitilanHallinnoija.pyoriikoLooppi()) {
             alue.getAktiivinenKokoelma().liiku(s);
         }
         paivitettava.paivita();
     }
 
     private void tarkistaJaKaanna(int kiertosuunta) {
-        if (tarkastaja.voikoKokoelmaKaantya(alue.getAktiivinenKokoelma(), kiertosuunta)) {
+        if (tarkastaja.voikoKokoelmaKaantya(alue.getAktiivinenKokoelma(), kiertosuunta) && pelitilanHallinnoija.pyoriikoLooppi()) {
             alue.getAktiivinenKokoelma().kaanny(kiertosuunta);
         }
         paivitettava.paivita();

@@ -10,30 +10,37 @@ import sxvz.tedris.engine.Paivitettava;
 
 /**
  * Luokka, joka etsii ja tuhoaa täydet rivit pyydettäessä.
+ * Välittää tiedon tuhotuista riveistä pistelaskurille.
  * 
  * @see sxvz.tedris.domain.Pelialue
  * @see sxvz.tedris.logic.Vapaustarkastaja
+ * @see sxvz.tedris.logic.Pisteenlaskenta
+ * @see sxvz.tedris.engine.Paivitettava
  */
 public class TaysienRivienKasittelija implements Paivitettava {
 
     private Pelialue alue;
     private Vapaustarkastaja tarkastaja;
+    private Pisteenlaskenta laskenta;
 
     /**
-     * Luo yhteyden pelialueeseen ja vapaustarkastajaan.
+     * Luo yhteyden pelialueeseen, vapaustarkastajaan ja pistelaskuriin.
      * 
      * @param alue Pelialue
      * @param tarkastaja Vapaustarkastaja
+     * @param laskenta Pisteenlaskennan hoitava luokka
      */
-    public TaysienRivienKasittelija(Pelialue alue, Vapaustarkastaja tarkastaja) {
+    public TaysienRivienKasittelija(Pelialue alue, Vapaustarkastaja tarkastaja, Pisteenlaskenta laskenta) {
         this.alue = alue;
         this.tarkastaja = tarkastaja;
+        this.laskenta = laskenta;
     }
 
     private void kasitteleTaydetRivit() {
         ArrayList<Integer> taydetRivit = etsiTaydetRivit();
 
         if (!taydetRivit.isEmpty()) {
+            laskenta.pisteyta(taydetRivit);
             tuhoaPalikatRivilta(taydetRivit);
             jaaKokoelmat();
             pudotaKokoelmat();
@@ -126,7 +133,8 @@ public class TaysienRivienKasittelija implements Paivitettava {
     
     /**
      * Etsii täydet rivit.
-     * Jos täysiä rivejä löytyy ne tuhotaan ja palikat jaetaan uusiin kokoelmiin.
+     * Jos täysiä rivejä löytyy ne tuhotaan ja palikat jaetaan uusiin kokoelmiin
+     * sekä lähetetään tieto tuhotuista riveistä pistelaskurille.
      */
     @Override
     public void paivita() {

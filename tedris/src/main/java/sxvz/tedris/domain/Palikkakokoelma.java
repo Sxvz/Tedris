@@ -31,7 +31,8 @@ public abstract class Palikkakokoelma {
     }
 
     /**
-     * Metodi, joka liikuttaa koko kokoelmaa. Ei tarkista onko tiellä jotakin.
+     * Metodi, joka liikuttaa koko kokoelmaa.
+     * Ei tarkista onko tiellä jotakin.
      *
      * @param s Kertoo suunnan johon liikutaan
      */

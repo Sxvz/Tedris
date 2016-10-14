@@ -13,8 +13,8 @@ public class NelioKokoelma extends Palikkakokoelma {
      * Konstruktori kokoelman luontia varten.
      * 
      * @param vari Kokoelman väri
-     * @param x Pääpalikan x-koordinaatti
-     * @param y Pääpalikan y-koordinaatti
+     * @param x X-koordinaati pääpalikalle
+     * @param y Y-koordinaati pääpalikalle
      * 
      * @see sxvz.tedris.logic.AktiivisenKokoelmanHallinnoija 
      */

@@ -10,13 +10,13 @@ public class PelilooppiTest {
 
     @Before
     public void setUp() {
-        looppi = new Pelilooppi();
+        looppi = new Pelilooppi(1000);
     }
 
     @Test
     public void loopinKonstruktoriAsettaaMuuttujatOikein() {
         assertTrue(looppi.paivitettavat != null);
-        assertEquals(2000, looppi.getInitialDelay());
+        assertEquals(100, looppi.getInitialDelay());
         assertEquals(1, looppi.getActionListeners().length);
         assertEquals(0, looppi.paivitettavat.size());
     }

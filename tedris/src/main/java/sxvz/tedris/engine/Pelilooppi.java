@@ -10,9 +10,6 @@ import javax.swing.Timer;
  * Perustuu Timer-luokkaan tasaisempaa syorituskykyä varten.
  * 
  * @see sxvz.tedris.engine.Paivitettava
- * @see sxvz.tedris.logic.AktiivisenKokoelmanHallinnoija
- * @see sxvz.tedris.logic.TaysienRivienKasittelija
- * @see sxvz.tedris.gui.Piirtoalusta
  */
 public class Pelilooppi extends Timer implements ActionListener {
 
@@ -20,14 +17,16 @@ public class Pelilooppi extends Timer implements ActionListener {
 
     /**
      * Konstruktori, joka huolehtii alkuarvojen asettamisesta.
+     * 
+     * @param viive Aika looppien välillä
      */
-    public Pelilooppi() {
-        super(1000, null);
+    public Pelilooppi(int viive) {
+        super(viive, null);
 
         paivitettavat = new ArrayList<>();
 
         addActionListener(this);
-        setInitialDelay(2000);
+        setInitialDelay(100);
     }
 
     @Override

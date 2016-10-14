@@ -11,6 +11,7 @@ import sxvz.tedris.domain.Pelialue;
  * GUI:n osa, joka piirtää pelitilanteen näytölle.
  * 
  * @see sxvz.tedris.domain.Pelialue
+ * @see sxvz.tedris.engine.Paivitettava
  */
 public class Piirtoalusta extends JPanel implements Paivitettava {
 
@@ -29,7 +30,7 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
     }
 
     /**
-     * Piirtää kaikki palikat näytölle.
+     * Piirtää kaikki relevantit palikat näytölle.
      * 
      * @param g Grafiikka, johon piirretään
      */
@@ -46,10 +47,10 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
         }
     }
 
-    protected void piirraKokoelma(Graphics g, Palikkakokoelma kokoelma) {
+    private void piirraKokoelma(Graphics g, Palikkakokoelma kokoelma) {
         g.setColor(kokoelma.getVari());
         for (Palikka p : kokoelma.getPalikat()) {
-            g.fillRect(p.getX() * palikanKoko, p.getY() * palikanKoko, palikanKoko, palikanKoko);
+            g.fill3DRect(p.getX() * palikanKoko, p.getY() * palikanKoko, palikanKoko, palikanKoko, true);
         }
     }
 

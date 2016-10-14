@@ -33,7 +33,7 @@ public class Debugkokoelma extends Palikkakokoelma {
     /**
      * Mahdollistaa helpon palikoiden lisäämisen kokoelmaan luonnin jälkeen.
      * 
-     * @param p lisättävä palikka
+     * @param p Lisättävä palikka
      */
     public void lisaaPalikka(Palikka p) {
         palikat.add(p);

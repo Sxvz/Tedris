@@ -7,6 +7,7 @@ import sxvz.tedris.domain.KaanteinenLKokoelma;
 import sxvz.tedris.domain.KaanteinenPorrasKokoelma;
 import sxvz.tedris.domain.LKokoelma;
 import sxvz.tedris.domain.NelioKokoelma;
+import sxvz.tedris.domain.Palikka;
 import sxvz.tedris.domain.Palikkakokoelma;
 import sxvz.tedris.domain.Pelialue;
 import sxvz.tedris.domain.PitkaKokoelma;
@@ -14,37 +15,39 @@ import sxvz.tedris.domain.PorrasKokoelma;
 import sxvz.tedris.domain.Suunta;
 import sxvz.tedris.domain.TKokoelma;
 import sxvz.tedris.engine.Paivitettava;
-import sxvz.tedris.gui.SeuraavanPiirtaja;
+import sxvz.tedris.gui.NapinKuuntelija;
 
 /**
- * Luokka, joka huolehtii aktiivisesta kokoelmasta. Välittää seuraavan kokoelman
- * näytettäväksi.
+ * Luokka, joka huolehtii aktiivisesta kokoelmasta.
+ * Lopettaa pelin painamalla luovutusnappia,
+ * jos uudelle palikalle ei ole tilaa.
  *
  * @see sxvz.tedris.domain.Pelialue
  * @see sxvz.tedris.logic.Vapaustarkastaja
- * @see sxvz.tedris.gui.SeuraavanPiirtaja
+ * @see sxvz.tedris.gui.NapinKuuntelija
+ * @see sxvz.tedris.engine.Paivitettava
  */
 public class AktiivisenKokoelmanHallinnoija implements Paivitettava {
 
     private Pelialue alue;
     private Vapaustarkastaja tarkastaja;
-    private SeuraavanPiirtaja seuraavanPiirtaja;
+    private NapinKuuntelija napinKuuntelija;
     private Random random;
     private ArrayList<Color> varit;
-    private Palikkakokoelma seuraavaKokoelma;
 
     /**
      * Alustaa tarvittavat muuttujat ja määrittää mahdolliset palikan värit.
      *
      * @param alue Pelialue
      * @param tarkastaja Luokka, joka hoitaa törmäyksenvalvonnan
-     * @param seuraavanPiirtaja Luokka, joka piirtää seuraavan kokoelman
+     * @param napinKuuntelija Luovuttamisnapin kuuntelija
+     * @param random arpoja
      */
-    public AktiivisenKokoelmanHallinnoija(Pelialue alue, Vapaustarkastaja tarkastaja, SeuraavanPiirtaja piirtaja) {
+    public AktiivisenKokoelmanHallinnoija(Pelialue alue, Vapaustarkastaja tarkastaja, NapinKuuntelija napinKuuntelija, Random random) {
         this.alue = alue;
         this.tarkastaja = tarkastaja;
-        seuraavanPiirtaja = piirtaja;
-        random = new Random();
+        this.napinKuuntelija = napinKuuntelija;
+        this.random = random;
         varit = new ArrayList<>();
         varit.add(Color.BLUE);
         varit.add(Color.CYAN);
@@ -58,12 +61,16 @@ public class AktiivisenKokoelmanHallinnoija implements Paivitettava {
     private void hallinnoiAktiivistaKokoelmaa() {
         Palikkakokoelma aktiivinen = alue.getAktiivinenKokoelma();
 
-        if (seuraavaKokoelma == null) {
+        if (alue.getSeuraavaKokoelma() == null) {
             luoSeuraavaKokoelma();
         }
 
         if (aktiivinen == null) {
-            alue.setAktiivinenKokoelma(seuraavaKokoelma);
+            if (!onkoTilaaUudelleAktiiviselle()) {
+                return;
+            }
+            
+            alue.setAktiivinenKokoelma(alue.getSeuraavaKokoelma());
             luoSeuraavaKokoelma();
         } else {
             boolean liikkuminenOnnistuu = tarkastaja.voikoKokoelmaLiikkua(aktiivinen, Suunta.ALAS);
@@ -77,12 +84,18 @@ public class AktiivisenKokoelmanHallinnoija implements Paivitettava {
         }
     }
 
-    private void luoSeuraavaKokoelma() {
-        seuraavaKokoelma = luoUusiKokoelma();
-        if (seuraavanPiirtaja != null) {
-            seuraavanPiirtaja.setSeuraavaKokoelma(seuraavaKokoelma);
-            seuraavanPiirtaja.paivita();
+    private boolean onkoTilaaUudelleAktiiviselle() {
+        for (Palikka p : alue.getSeuraavaKokoelma().getPalikat()) {
+            if (!tarkastaja.voikoLiikkua(alue.getSeuraavaKokoelma(), p.getX(), p.getY())) {
+                napinKuuntelija.actionPerformed(null);
+                return false;
+            }
         }
+        return true;
+    }
+
+    private void luoSeuraavaKokoelma() {
+        alue.setSeuraavaKokoelma(luoUusiKokoelma());
     }
 
     private Palikkakokoelma luoUusiKokoelma() {
@@ -112,7 +125,8 @@ public class AktiivisenKokoelmanHallinnoija implements Paivitettava {
 
     /**
      * Huolehtii aktiivisen kokoelman putoamisesta ja arpoo uuden, kun vanha
-     * liimautuu lattiaan.
+     * liimautuu lattiaan. Jos uudelle kokoelmalle ei ole tilaa painetaan
+     * luovuttamisnappia.
      */
     @Override
     public void paivita() {

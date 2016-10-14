@@ -4,27 +4,32 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 import sxvz.tedris.domain.Palikka;
 import sxvz.tedris.domain.Palikkakokoelma;
+import sxvz.tedris.domain.Pelialue;
 import sxvz.tedris.engine.Paivitettava;
 
 /**
- * GUI:n osa, joka piirtää seuraavan kokoelman näytölle. Pohjautuu
- * Piirtoalustaan, mutta ei teknisistä syistä extendaa sitä.
+ * GUI:n osa, joka piirtää seuraavaksi vuorossa olevan kokoelman näytölle.
+ * Pohjautuu Piirtoalustaan, mutta ei teknisistä syistä extendaa sitä 
+ * (mm. super.paintComponent() rikkoutuu).
  *
  * @see sxvz.tedris.logic.AktiivisenKokoelmanHallinnoija
  * @see sxvz.tedris.gui.Piirtoalusta
+ * @see sxvz.tedris.engine.Paivitettava
  */
 public class SeuraavanPiirtaja extends JPanel implements Paivitettava {
 
     private int palikanKoko;
-    private Palikkakokoelma seuraavaKokoelma;
+    private Pelialue alue;
 
     /**
      * Konstruktori, joka välittää palikan koon piirtämistä varten.
      *
      * @param palikanKoko Palikan sivun koko pikseleinä
+     * @param alue Pelialue, jolta seuraava kokoelma piirretään
      */
-    public SeuraavanPiirtaja(int palikanKoko) {
+    public SeuraavanPiirtaja(int palikanKoko, Pelialue alue) {
         this.palikanKoko = palikanKoko;
+        this.alue = alue;
     }
 
     /**
@@ -36,20 +41,16 @@ public class SeuraavanPiirtaja extends JPanel implements Paivitettava {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        if (seuraavaKokoelma != null) {
-            piirraKokoelma(g, seuraavaKokoelma);
+        if (alue.getSeuraavaKokoelma() != null) {
+            piirraKokoelma(g, alue.getSeuraavaKokoelma());
         }
     }
 
-    protected void piirraKokoelma(Graphics g, Palikkakokoelma kokoelma) {
+    private void piirraKokoelma(Graphics g, Palikkakokoelma kokoelma) {
         g.setColor(kokoelma.getVari());
         for (Palikka p : kokoelma.getPalikat()) {
-            g.fillRect((p.getX() - 5) * palikanKoko - (palikanKoko / 2), (p.getY() + 4) * palikanKoko, palikanKoko, palikanKoko);
+            g.fill3DRect((p.getX() - 5) * palikanKoko - (palikanKoko / 2), (p.getY() + 4) * palikanKoko, palikanKoko, palikanKoko, true);
         }
-    }
-
-    public void setSeuraavaKokoelma(Palikkakokoelma seuraavaKokoelma) {
-        this.seuraavaKokoelma = seuraavaKokoelma;
     }
 
     @Override
