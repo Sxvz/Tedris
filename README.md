@@ -7,4 +7,4 @@ Tetriksen kaltainen peli koodauksen harjoittelua varten
 - [PIT-raportti](https://htmlpreview.github.io/?https://github.com/Sxvz/Tedris/blob/master/dokumentaatio/pit-raportti/201610142051/index.html)
 - [CheckStyle-raportti](https://htmlpreview.github.io/?https://github.com/Sxvz/Tedris/blob/master/dokumentaatio/checkstyle-raportti/checkstyle.html)
 - [JavaDoc](https://htmlpreview.github.io/?https://github.com/Sxvz/Tedris/blob/master/javadoc/apidocs/index.html)
-- [Käyttöohjeet](https://htmlpreview.github.io/?https://github.com/Sxvz/Tedris/blob/master/dokumentaatio/kayttoohjeet.md)
+- [Käyttöohjeet](dokumentaatio/kayttoohjeet.md)
