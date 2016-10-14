@@ -15,4 +15,5 @@ Päivä | Tunnit | Kuvaus
 10.10.2016 | 1h | GUI:n jatkosuunnittelua
 13.10.2016 | 2h | GUI:n jatkosuunnittelua ja toteutusta
 14.10.2016 | 5,5h | Sivupaneelin viimeistely ja toiminnallisuus, game over, alustuskoodin refactorointi (vanha vielä tallessa), pisteenlaskenta
+14.10.2016 | 4,5h | Testien, JavaDocin ja kaiken muun oheismateriaalin täydennys/päivitys. Suoritettavan .jar-tiedoston luonti.
 
