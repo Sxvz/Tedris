@@ -99,25 +99,42 @@ public class AktiivisenKokoelmanHallinnoija implements Paivitettava {
     }
 
     private Palikkakokoelma luoUusiKokoelma() {
-        Color vari = varit.get(random.nextInt(varit.size()));
+//        Color vari = varit.get(random.nextInt(varit.size()));
         int x = alue.getLeveys() / 2;
         int i = random.nextInt(7);
 
+//        switch (i) {
+//            case 0:
+//                return new PitkaKokoelma(vari, x, 0);
+//            case 1:
+//                return new NelioKokoelma(vari, x, 0);
+//            case 2:
+//                return new LKokoelma(vari, x, 1);
+//            case 3:
+//                return new KaanteinenLKokoelma(vari, x, 0);
+//            case 4:
+//                return new PorrasKokoelma(vari, x, 1);
+//            case 5:
+//                return new KaanteinenPorrasKokoelma(vari, x, 1);
+//            case 6:
+//                return new TKokoelma(vari, x, 0);
+//        }
+        
         switch (i) {
             case 0:
-                return new PitkaKokoelma(vari, x, 0);
+                return new PitkaKokoelma(Color.CYAN, x, 0);
             case 1:
-                return new NelioKokoelma(vari, x, 0);
+                return new NelioKokoelma(Color.YELLOW, x, 0);
             case 2:
-                return new LKokoelma(vari, x, 1);
+                return new LKokoelma(Color.ORANGE, x, 1);
             case 3:
-                return new KaanteinenLKokoelma(vari, x, 0);
+                return new KaanteinenLKokoelma(Color.BLUE, x, 0);
             case 4:
-                return new PorrasKokoelma(vari, x, 1);
+                return new PorrasKokoelma(Color.GREEN, x, 1);
             case 5:
-                return new KaanteinenPorrasKokoelma(vari, x, 1);
+                return new KaanteinenPorrasKokoelma(Color.RED, x, 1);
             case 6:
-                return new TKokoelma(vari, x, 0);
+                return new TKokoelma(Color.MAGENTA, x, 0);
         }
 
         return null;

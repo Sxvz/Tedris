@@ -20,7 +20,7 @@ public class Nappaimistonkuuntelija implements KeyListener {
 
     /**
      * Konstruktori, joka luo kuuntelijalle tarvittavat yhteydet.
-     * 
+     *
      * @param alue Pelialue, jossa liikkuminen tapahtuu
      * @param pelitilanHallinnoija Luokka, joka huolehtii pausetuksesta
      * @param tarkastaja Vapaustarkastaja
@@ -34,15 +34,15 @@ public class Nappaimistonkuuntelija implements KeyListener {
     @Override
     public void keyTyped(KeyEvent e) {
     }
-    
+
     /**
      * Käsittelee näppäimistön painallukset ja liikuttaa aktiivista kokoelmaa
      * painetun näppäimen perusteella. Tarkistaa onko liikkuminen sallittua.
-     * Päivittää ruudun liikkumisen jälkeen.
-     * Q- ja E-näppäimet kääntävät aktiivista kokoelmaa.
-     * A-, S, ja D-näppäimet liikuttelevat aktiivista kokoelmaa sivuille ja alas.
-     * W-näppäin laittaa tauon päälle.
-     * 
+     * Päivittää ruudun liikkumisen jälkeen. Q- ja E-näppäimet kääntävät
+     * aktiivista kokoelmaa. A-, S, ja D-näppäimet liikuttelevat aktiivista
+     * kokoelmaa sivuille ja alas. W-näppäin laittaa tauon päälle.
+     * Space pudottaa kokoelman pohjaan asti.
+     *
      * @param e Näppäimistöstä tuleva inputti
      */
     @Override
@@ -63,6 +63,20 @@ public class Nappaimistonkuuntelija implements KeyListener {
             tarkistaJaKaanna(-1);
         } else if (e.getKeyCode() == KeyEvent.VK_E) {
             tarkistaJaKaanna(1);
+        } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            pudotaLoppuun();
+        }
+    }
+
+    private void pudotaLoppuun() {
+        boolean jokinLiikkui = true;
+        while (jokinLiikkui) {
+            jokinLiikkui = false;
+            if (tarkastaja.voikoKokoelmaLiikkua(alue.getAktiivinenKokoelma(), Suunta.ALAS)) {
+                alue.getAktiivinenKokoelma().liiku(Suunta.ALAS);
+                jokinLiikkui = true;
+            }
+            
         }
     }
 
@@ -87,7 +101,7 @@ public class Nappaimistonkuuntelija implements KeyListener {
         }
         paivitettava.paivita();
     }
-    
+
     public void setPaivitettava(Paivitettava paivitettava) {
         this.paivitettava = paivitettava;
     }

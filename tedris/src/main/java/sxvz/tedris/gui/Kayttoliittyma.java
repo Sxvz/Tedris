@@ -22,7 +22,7 @@ import sxvz.tedris.domain.Pelialue;
  * Graafisen käyttöliittymän pohjaluokka, joka toimii kaiken perustana ja
  * luo tarvittavat osat.
  * 
- * @deprecated Käyttöliittymän osien luonti siirretty Mainiin spagetin vähentämiseksi
+ * @deprecated Käyttöliittymän osien luonti siirretty Mainiin spaghetin vähentämiseksi
  */
 @Deprecated
 public class Kayttoliittyma implements Runnable {

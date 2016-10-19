@@ -49,7 +49,7 @@ public class SeuraavanPiirtaja extends JPanel implements Paivitettava {
     private void piirraKokoelma(Graphics g, Palikkakokoelma kokoelma) {
         g.setColor(kokoelma.getVari());
         for (Palikka p : kokoelma.getPalikat()) {
-            g.fill3DRect((p.getX() - 5) * palikanKoko - (palikanKoko / 2), (p.getY() + 4) * palikanKoko, palikanKoko, palikanKoko, true);
+            g.fill3DRect((p.getX() - alue.getLeveys() / 2 + 5) * palikanKoko - (palikanKoko / 2), (p.getY() + 4) * palikanKoko, palikanKoko, palikanKoko, true);
         }
     }
 
