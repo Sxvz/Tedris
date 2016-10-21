@@ -20,5 +20,5 @@ Päivä | Tunnit | Kuvaus
 18.10.2016 | 1h | Käyttöliittymän tuunaamista
 19.10.2016 | 2h | Tiedostotyökaluja ja highscorea
 20.10.2016 | 3,5h | Highscorejen näyttäminen ruudulla ja pop-up dialogien opiskelua
-21.10.2016 | 10:00-h | Nimikirjainten kysely
+21.10.2016 | 9h | Nimikirjainten kysely, bugi fixejä ja oheissälän täydennys
 

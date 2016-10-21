@@ -18,7 +18,7 @@ Highscore-systeemi lisätään, jos aikaa jää.
 ###Luokkakaavio
 ![Luokkakaavio](luokkakaavio.png)
 
-Selkeyden vuoksi luokkakaavioon ei ole merkitty Main-luokkaa, joka luo lähes kaikki muut luokat. Luonnin jälkeen vastuu pelistä jätetään GUI:ssa olevalle NapinKuuntelijalle, joka käynnistää PelitilanHallinnoijan kautta peliloopin.
+Selkeyden vuoksi luokkakaavioon ei ole merkitty Main-luokkaa, joka luo lähes kaikki muut luokat. Luonnin jälkeen vastuu pelistä jätetään GUI:ssa oleville napinKuuntelijoille, jotka käynnistävät PelitilanHallinnoijan kautta peliloopin ja hoitavat huipputulos toimintaa.
 
 Itse pelin pyörimisen aikana päävastuu on Peliloopilla, joka päivittää Paivitettava-interfacen toteuttavia luokkia ja Nappaimistonkuuntelijalla, joka ottaa inputteja vastaan sekä omalta osaltaan päivittää Piirtoalustaa.
 
@@ -28,6 +28,8 @@ Täysien rivien muodostuessa TaysienRivienKasittelija tuohoaa Pelialueelta niill
 Lopuksi TaysienRivienKasittelija pudottaa ilmaan jääneet kokoelmat Vapaustarkastajan avulla.
 
 Peli päättyy, kun AktiivisenKokoelmanHallinnoija tai pelaaja painaa Luovuta-nappia (NapinKuuntelija), jolloin PelitilanHallinnoija pysäyttää Peliloopin.
+
+Huipputulostoimintoja hallitaan useilla napeilla ja popup-ikkunoilla. Huipputulokset ovat tallennettuna tiedostoon, josta ne voidaan lukea tarvittaessa.
 
 ###Sekvenssikaavioita
 ![Sekvenssikaavio_liikkuminen](liikkuminen_sequence.png)
