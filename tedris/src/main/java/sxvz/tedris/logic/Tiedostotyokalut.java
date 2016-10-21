@@ -13,17 +13,24 @@ import java.util.ArrayList;
  */
 public class Tiedostotyokalut {
 
-    File tiedosto;
+    private File tiedosto;
 
     /**
      * Konstruktori, jolle kerrotaan käsiteltävä tiedosto.
      * Jos tiedostoa ei ole olemassa, se luodaan.
      * 
-     * @param tiedosto 
+     * @param tiedosto Käsiteltävä tiedosto
      */
     public Tiedostotyokalut(File tiedosto) {
         this.tiedosto = tiedosto;
 
+        luoTiedostoJosEiOlemassa();
+    }
+
+    /**
+     * Luo käsiteltävän tiedoston, jos sitä ei ole olemassa.
+     */
+    public void luoTiedostoJosEiOlemassa() {
         try {
             if (!tiedosto.exists()) {
                 tiedosto.createNewFile();

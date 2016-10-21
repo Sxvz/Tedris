@@ -10,7 +10,7 @@ import sxvz.tedris.domain.Debugkokoelma;
 import sxvz.tedris.domain.Palikka;
 import sxvz.tedris.domain.Pelialue;
 import sxvz.tedris.engine.Pelilooppi;
-import sxvz.tedris.gui.NapinKuuntelija;
+import sxvz.tedris.gui.LuovutaNapinKuuntelija;
 
 public class AktiivisenKokoelmanHallinnoijaTest {
 
@@ -19,7 +19,7 @@ public class AktiivisenKokoelmanHallinnoijaTest {
     private AktiivisenKokoelmanHallinnoija hallinnoija;
     private PelitilanHallinnoija pelitilanHallinnoija;
     private Pelilooppi looppi;
-    private NapinKuuntelija napinKuuntelija;
+    private LuovutaNapinKuuntelija napinKuuntelija;
     private JButton nappi;
     private Pisteenlaskenta laskenta;
 
@@ -29,9 +29,9 @@ public class AktiivisenKokoelmanHallinnoijaTest {
         tarkastaja = new Vapaustarkastaja(alue);
         looppi = new Pelilooppi(1000);
         laskenta = new Pisteenlaskenta(1);
-        pelitilanHallinnoija = new PelitilanHallinnoija(looppi, alue, laskenta);
+        pelitilanHallinnoija = new PelitilanHallinnoija(looppi, alue, laskenta, null, null);
         nappi = new JButton();
-        napinKuuntelija = new NapinKuuntelija(nappi, new JComboBox(), pelitilanHallinnoija, laskenta);
+        napinKuuntelija = new LuovutaNapinKuuntelija(nappi, nappi, new JComboBox(), pelitilanHallinnoija, laskenta);
         Random random = new Random() {
             @Override
             public int nextInt(int i) {
@@ -66,7 +66,7 @@ public class AktiivisenKokoelmanHallinnoijaTest {
     }
 
     @Test
-    public void uusiKokoelmaLuodaan() {
+    public void uudetKokoelmatLuodaanTarvittaessa() {
         alue.tyhjenna();
         hallinnoija.paivita();
 

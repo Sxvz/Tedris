@@ -11,10 +11,12 @@ import sxvz.tedris.engine.Paivitettava;
 /**
  * Luokka, joka etsii ja tuhoaa täydet rivit pyydettäessä.
  * Välittää tiedon tuhotuista riveistä pistelaskurille.
+ * Laukaisee vaikeuttajan, kun rivejä tuhoutuu.
  * 
  * @see sxvz.tedris.domain.Pelialue
  * @see sxvz.tedris.logic.Vapaustarkastaja
  * @see sxvz.tedris.logic.Pisteenlaskenta
+ * @see sxvz.tedris.logic.Vaikeuttaja
  * @see sxvz.tedris.engine.Paivitettava
  */
 public class TaysienRivienKasittelija implements Paivitettava {
@@ -22,18 +24,21 @@ public class TaysienRivienKasittelija implements Paivitettava {
     private Pelialue alue;
     private Vapaustarkastaja tarkastaja;
     private Pisteenlaskenta laskenta;
+    private Vaikeuttaja vaikeuttaja;
 
     /**
-     * Luo yhteyden pelialueeseen, vapaustarkastajaan ja pistelaskuriin.
+     * Luo tarvittavat yhteydet.
      * 
      * @param alue Pelialue
      * @param tarkastaja Vapaustarkastaja
      * @param laskenta Pisteenlaskennan hoitava luokka
+     * @param vaikeuttaja Kesken pelin vaikeusastetta muuttava luokka
      */
-    public TaysienRivienKasittelija(Pelialue alue, Vapaustarkastaja tarkastaja, Pisteenlaskenta laskenta) {
+    public TaysienRivienKasittelija(Pelialue alue, Vapaustarkastaja tarkastaja, Pisteenlaskenta laskenta, Vaikeuttaja vaikeuttaja) {
         this.alue = alue;
         this.tarkastaja = tarkastaja;
         this.laskenta = laskenta;
+        this.vaikeuttaja = vaikeuttaja;
     }
 
     private void kasitteleTaydetRivit() {
@@ -44,6 +49,7 @@ public class TaysienRivienKasittelija implements Paivitettava {
             tuhoaPalikatRivilta(taydetRivit);
             jaaKokoelmat();
             pudotaKokoelmat();
+            vaikeuttaja.paivita();
         }
     }
 
@@ -133,8 +139,9 @@ public class TaysienRivienKasittelija implements Paivitettava {
     
     /**
      * Etsii täydet rivit.
-     * Jos täysiä rivejä löytyy ne tuhotaan ja palikat jaetaan uusiin kokoelmiin
-     * sekä lähetetään tieto tuhotuista riveistä pistelaskurille.
+     * Jos täysiä rivejä löytyy ne tuhotaan, jaetaan palikat uusiin kokoelmiin
+     * ja lähetetään tieto tuhotuista riveistä pistelaskurille sekä laukastaan
+     * vaikeuttaja, joka vaikeuttaa peliä.
      */
     @Override
     public void paivita() {

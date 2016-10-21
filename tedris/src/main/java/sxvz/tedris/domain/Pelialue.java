@@ -40,6 +40,7 @@ public class Pelialue {
     public void tyhjenna() {
         kokoelmat.clear();
         aktiivinenKokoelma = null;
+        seuraavaKokoelma = null;
     }
 
     public int getLeveys() {

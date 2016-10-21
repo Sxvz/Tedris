@@ -24,11 +24,13 @@ public class Nappaimistonkuuntelija implements KeyListener {
      * @param alue Pelialue, jossa liikkuminen tapahtuu
      * @param pelitilanHallinnoija Luokka, joka huolehtii pausetuksesta
      * @param tarkastaja Vapaustarkastaja
+     * @param paivitettava Olio, jota kuuntelija päivittää liikkumisnappeja painellessa
      */
-    public Nappaimistonkuuntelija(Pelialue alue, PelitilanHallinnoija pelitilanHallinnoija, Vapaustarkastaja tarkastaja) {
+    public Nappaimistonkuuntelija(Pelialue alue, PelitilanHallinnoija pelitilanHallinnoija, Vapaustarkastaja tarkastaja, Paivitettava paivitettava) {
         this.alue = alue;
         this.pelitilanHallinnoija = pelitilanHallinnoija;
         this.tarkastaja = tarkastaja;
+        this.paivitettava = paivitettava;
     }
 
     @Override
@@ -78,6 +80,8 @@ public class Nappaimistonkuuntelija implements KeyListener {
             }
             
         }
+        
+        paivitettava.paivita();
     }
 
     @Override
@@ -100,9 +104,5 @@ public class Nappaimistonkuuntelija implements KeyListener {
             alue.getAktiivinenKokoelma().kaanny(kiertosuunta);
         }
         paivitettava.paivita();
-    }
-
-    public void setPaivitettava(Paivitettava paivitettava) {
-        this.paivitettava = paivitettava;
     }
 }

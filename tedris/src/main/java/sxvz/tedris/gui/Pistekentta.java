@@ -5,19 +5,18 @@ import sxvz.tedris.engine.Paivitettava;
 import sxvz.tedris.logic.Pisteenlaskenta;
 
 /**
- * Pisteiden näyttämistä varten modattu JTextFieldi.
- * 
+ * Pisteiden näyttämistä varten modattu JTextField.
+ *
  * @see sxvz.tedris.engine.Paivitettava
  */
 public class Pistekentta extends JTextField implements Paivitettava {
 
-    private String etumerkki;
     private Pisteenlaskenta laskenta;
     private int toiminto;
 
     /**
      * Konstruktori, jossa muodostetaan yhteys pisteitä laskevaan luokkaan.
-     * 
+     *
      * @param laskenta Pisteitä laskeva luokka
      * @param toiminto Kertoo näytetäänkö kokonaispisteet vai juuri lisätyt
      */
@@ -30,11 +29,11 @@ public class Pistekentta extends JTextField implements Paivitettava {
     }
 
     private String muodostaPisteString() {
+        String etumerkki = "   ";
         String pisteet = "";
         String loppuosa = "";
 
         if (toiminto == 0) {
-            etumerkki = "   ";
             loppuosa = Integer.toString(laskenta.getPisteet());
         } else if (toiminto == 1) {
             etumerkki = "+";

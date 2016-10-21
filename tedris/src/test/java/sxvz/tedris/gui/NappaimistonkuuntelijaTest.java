@@ -16,10 +16,10 @@ public class NappaimistonkuuntelijaTest {
     
     @Before
     public void setUp() {
-        alue = new Pelialue(20,30);
-        kuuntelija = new Nappaimistonkuuntelija(alue,null,null);
+        alue = new Pelialue(20, 30);
+        kuuntelija = new Nappaimistonkuuntelija(alue, null, null, null);
         kokoelma = new Debugkokoelma();
-        kokoelma.lisaaPalikka(new Palikka(0,0));
+        kokoelma.lisaaPalikka(new Palikka(0, 0));
         
     }
     

@@ -3,7 +3,7 @@ package sxvz.tedris.domain;
 import java.awt.Color;
 
 /**
- * Palikkakokoelma, joihin ei aktiivisten kokoelmien palikat päätyvät, kun
+ * Palikkakokoelma, joihin ei-aktiivisten kokoelmien palikat päätyvät, kun
  * niiden ei tarvitse enää tehdä mitään muuta kuin olla olemassa.
  * 
  * @see sxvz.tedris.domain.Palikkakokoelma

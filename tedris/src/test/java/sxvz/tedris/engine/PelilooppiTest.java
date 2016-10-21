@@ -25,7 +25,7 @@ public class PelilooppiTest {
     public void looppiinVoiLisataPaivitettavia() {
         looppi.lisaaPaivitettava(null);
         looppi.lisaaPaivitettava(null);
-        
+
         assertEquals(2, looppi.paivitettavat.size());
     }
 }

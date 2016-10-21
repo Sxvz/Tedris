@@ -35,6 +35,8 @@ public class PelialueTest {
         alue.tyhjenna();
 
         assertEquals(0, alue.getKokoelmat().size());
+        assertNull(alue.getAktiivinenKokoelma());
+        assertNull(alue.getSeuraavaKokoelma());
     }
 
 }

@@ -6,6 +6,7 @@ import org.junit.Test;
 import sxvz.tedris.domain.Debugkokoelma;
 import sxvz.tedris.domain.Palikka;
 import sxvz.tedris.domain.Pelialue;
+import sxvz.tedris.engine.Pelilooppi;
 
 public class TaysienRivienKasittelijaTest {
     private Pelialue alue;
@@ -13,6 +14,8 @@ public class TaysienRivienKasittelijaTest {
     private Debugkokoelma kokoelma;
     private TaysienRivienKasittelija kasittelija;
     private Pisteenlaskenta laskenta;
+    private Pelilooppi looppi;
+    private Vaikeuttaja vaikeuttaja;
 
     @Before
     public void setUp() {
@@ -20,27 +23,36 @@ public class TaysienRivienKasittelijaTest {
         tarkastaja = new Vapaustarkastaja(alue);
         kokoelma = new Debugkokoelma();
         laskenta = new Pisteenlaskenta(20);
-        kasittelija = new TaysienRivienKasittelija(alue, tarkastaja, laskenta);
+        looppi = new Pelilooppi(1000);
+        vaikeuttaja = new Vaikeuttaja(looppi, 0.5);
+        kasittelija = new TaysienRivienKasittelija(alue, tarkastaja, laskenta, vaikeuttaja);
         kokoelma.rivinLevyinenPalikka(3);
         alue.lisaaKokoelma(kokoelma);
     }
     
     @Test
-    public void taysiRiviTuhotaan() {
+    public void TaysiRiviTuhotaan() {
         kasittelija.paivita();
         
         assertEquals(0, alue.getKokoelmat().size());
     }
     
     @Test
-    public void taysiRiviPisteytetaan() {
+    public void TaysiRiviPisteytetaan() {
         kasittelija.paivita();
         
         assertTrue(0 < laskenta.getPisteet());
     }
     
     @Test
-    public void kokoelmatPaloitellaanOikein() {
+    public void VaikeuttajaaPaivitetaan(){
+        kasittelija.paivita();
+        
+        assertEquals(500 ,looppi.getDelay());
+    }
+    
+    @Test
+    public void KokoelmatPaloitellaanOikein() {
         Debugkokoelma kokoelma2 = new Debugkokoelma();
         kokoelma2.lisaaPalikka(new Palikka(2,2));
         kokoelma2.lisaaPalikka(new Palikka(2,1));
@@ -58,7 +70,7 @@ public class TaysienRivienKasittelijaTest {
     }
     
     @Test
-    public void jamaPalikatPaatyvatPohjalle() {
+    public void JamaPalikatPaatyvatPohjalle() {
         Debugkokoelma kokoelma2 = new Debugkokoelma();
         kokoelma2.lisaaPalikka(new Palikka(2,1));
         kokoelma2.lisaaPalikka(new Palikka(2,2));

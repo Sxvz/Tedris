@@ -15,7 +15,7 @@ import sxvz.tedris.domain.PorrasKokoelma;
 import sxvz.tedris.domain.Suunta;
 import sxvz.tedris.domain.TKokoelma;
 import sxvz.tedris.engine.Paivitettava;
-import sxvz.tedris.gui.NapinKuuntelija;
+import sxvz.tedris.gui.LuovutaNapinKuuntelija;
 
 /**
  * Luokka, joka huolehtii aktiivisesta kokoelmasta.
@@ -24,38 +24,38 @@ import sxvz.tedris.gui.NapinKuuntelija;
  *
  * @see sxvz.tedris.domain.Pelialue
  * @see sxvz.tedris.logic.Vapaustarkastaja
- * @see sxvz.tedris.gui.NapinKuuntelija
+ * @see sxvz.tedris.gui.LuovutaNapinKuuntelija
  * @see sxvz.tedris.engine.Paivitettava
  */
 public class AktiivisenKokoelmanHallinnoija implements Paivitettava {
 
     private Pelialue alue;
     private Vapaustarkastaja tarkastaja;
-    private NapinKuuntelija napinKuuntelija;
+    private LuovutaNapinKuuntelija napinKuuntelija;
     private Random random;
     private ArrayList<Color> varit;
 
     /**
-     * Alustaa tarvittavat muuttujat ja määrittää mahdolliset palikan värit.
+     * Alustaa tarvittavat muuttujat.
      *
      * @param alue Pelialue
      * @param tarkastaja Luokka, joka hoitaa törmäyksenvalvonnan
      * @param napinKuuntelija Luovuttamisnapin kuuntelija
-     * @param random arpoja
+     * @param random Arpoja
      */
-    public AktiivisenKokoelmanHallinnoija(Pelialue alue, Vapaustarkastaja tarkastaja, NapinKuuntelija napinKuuntelija, Random random) {
+    public AktiivisenKokoelmanHallinnoija(Pelialue alue, Vapaustarkastaja tarkastaja, LuovutaNapinKuuntelija napinKuuntelija, Random random) {
         this.alue = alue;
         this.tarkastaja = tarkastaja;
         this.napinKuuntelija = napinKuuntelija;
         this.random = random;
-        varit = new ArrayList<>();
-        varit.add(Color.BLUE);
-        varit.add(Color.CYAN);
-        varit.add(Color.GREEN);
-        varit.add(Color.MAGENTA);
-        varit.add(Color.ORANGE);
-        varit.add(Color.RED);
-        varit.add(Color.YELLOW);
+//        varit = new ArrayList<>();
+//        varit.add(Color.BLUE);
+//        varit.add(Color.CYAN);
+//        varit.add(Color.GREEN);
+//        varit.add(Color.MAGENTA);
+//        varit.add(Color.ORANGE);
+//        varit.add(Color.RED);
+//        varit.add(Color.YELLOW);
     }
 
     private void hallinnoiAktiivistaKokoelmaa() {

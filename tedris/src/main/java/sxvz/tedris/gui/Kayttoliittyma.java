@@ -33,7 +33,7 @@ public class Kayttoliittyma implements Runnable {
     private int palikanKoko;
     private Piirtoalusta piirtoalusta;
     private SeuraavanPiirtaja seuraavanPiirtaja;
-    private NapinKuuntelija napinKuuntelija;
+    private LuovutaNapinKuuntelija napinKuuntelija;
     
     /**
      * Konstruktori, jolla määritetään pelissä olevien palikoiden koko pikseleinä.
@@ -77,7 +77,7 @@ public class Kayttoliittyma implements Runnable {
         piirtoalusta.setBackground(Color.WHITE);
         container.add(piirtoalusta);
         
-        nappaimistonKuuntelija.setPaivitettava(piirtoalusta);
+        //nappaimistonKuuntelija.setPaivitettava(piirtoalusta);
         
         JSeparator menunErottaja = new JSeparator(SwingConstants.VERTICAL);
         menunErottaja.setBounds(paaAlustanLeveys, insets.top, 5, paaAlustanKorkeus);
@@ -133,7 +133,7 @@ public class Kayttoliittyma implements Runnable {
         
         JButton aloitaLuovutaNappi = new JButton("Aloita");
         aloitaLuovutaNappi.setFocusable(false);
-        //napinKuuntelija = new NapinKuuntelija(aloitaLuovutaNappi);
+        //napinKuuntelija = new LuovutaNapinKuuntelija(aloitaLuovutaNappi);
         aloitaLuovutaNappi.addActionListener(napinKuuntelija);
         sivuPaneeli.add(aloitaLuovutaNappi);
         
