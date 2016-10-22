@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.util.Random;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -87,7 +88,10 @@ public class Main {
                 PelitilanHallinnoija pelitilanHallinnoija = new PelitilanHallinnoija(looppi, alue, laskenta, tulokset, new NimikirjaintenKysyja(frame));
 
                 //jatketaan GUIta
+                //Linux koko (Ubuntu 14)
                 frame.setPreferredSize(new Dimension(paaAlustanLeveys + menunErottajanLeveys + sivupaneelinLeveys + reunatila, paaAlustanKorkeus));
+                //Windows 10 korjattu versio
+                //frame.setPreferredSize(new Dimension(paaAlustanLeveys + menunErottajanLeveys + sivupaneelinLeveys + reunatila + 6, paaAlustanKorkeus + 29));
                 frame.setMinimumSize(frame.getPreferredSize());
                 frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
                 frame.setResizable(false);
