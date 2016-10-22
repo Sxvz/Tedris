@@ -21,5 +21,5 @@ Päivä | Tunnit | Kuvaus
 19.10.2016 | 2h | Tiedostotyökaluja ja highscorea
 20.10.2016 | 3,5h | Highscorejen näyttäminen ruudulla ja pop-up dialogien opiskelua
 21.10.2016 | 9h | Nimikirjainten kysely, bugi fixejä ja oheissälän täydennys
-22.10.2016 | 0,5h | Windows 10 versio
+22.10.2016 | 0,5h | Yleispätevä versio
 

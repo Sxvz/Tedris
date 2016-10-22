@@ -88,11 +88,8 @@ public class Main {
                 PelitilanHallinnoija pelitilanHallinnoija = new PelitilanHallinnoija(looppi, alue, laskenta, tulokset, new NimikirjaintenKysyja(frame));
 
                 //jatketaan GUIta
-                //Linux koko (Ubuntu 14)
-                frame.setPreferredSize(new Dimension(paaAlustanLeveys + menunErottajanLeveys + sivupaneelinLeveys + reunatila, paaAlustanKorkeus));
-                //Windows 10 korjattu versio
-                //frame.setPreferredSize(new Dimension(paaAlustanLeveys + menunErottajanLeveys + sivupaneelinLeveys + reunatila + 6, paaAlustanKorkeus + 29));
-                frame.setMinimumSize(frame.getPreferredSize());
+                frame.getContentPane().setPreferredSize(new Dimension(paaAlustanLeveys + menunErottajanLeveys + sivupaneelinLeveys + reunatila, paaAlustanKorkeus));
+                frame.getContentPane().setMinimumSize(frame.getContentPane().getPreferredSize());
                 frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
                 frame.setResizable(false);
 
