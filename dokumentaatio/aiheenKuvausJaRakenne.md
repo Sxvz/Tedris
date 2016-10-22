@@ -12,21 +12,22 @@
 - liikuta palikkaa oikealle tai vasemmalle
 - käännä palikkaa
 - pudota palikkaa nopeammin
+- pudota palikka suoraan pohjaan
 - luovuta
 
 ###Luokkakaavio
 ![Luokkakaavio](luokkakaavio.png)
 
-Selkeyden vuoksi luokkakaavioon ei ole merkitty Main-luokkaa, joka luo lähes kaikki muut luokat. Luonnin jälkeen vastuu pelistä jätetään GUI:ssa oleville napinKuuntelijoille, jotka käynnistävät PelitilanHallinnoijan kautta peliloopin ja hoitavat huipputulos toimintaa.
+Selkeyden vuoksi luokkakaavioon ei ole merkitty Main-luokkaa, joka luo lähes kaikki muut luokat. Luonnin jälkeen vastuu pelistä jätetään GUI:ssa oleville napinkuuntelijoille, jotka käynnistävät PelitilanHallinnoijan kautta Peliloopin ja hoitavat huipputulostoimintaa.
 
 Itse pelin pyörimisen aikana päävastuu on Peliloopilla, joka päivittää Paivitettava-interfacen toteuttavia luokkia ja Nappaimistonkuuntelijalla, joka ottaa inputteja vastaan sekä omalta osaltaan päivittää Piirtoalustaa.
 
-Pelaajan hallinnassa olevan kokoelman liikkuessa Nappaimistonkuuntelija ja AktiivisenKokoelmanHallinnoija varmistavat tarvittaessa luukuttelun olevan sallittua.
+Pelaajan hallinnassa olevan kokoelman liikkuessa Nappaimistonkuuntelija ja AktiivisenKokoelmanHallinnoija varmistavat tarvittaessa liikuttelun olevan sallittua.
 
 Täysien rivien muodostuessa TaysienRivienKasittelija tuohoaa Pelialueelta niillä olevat Palikat ja raportoi tuhotuista palikoista PisteenLaskennalle.
 Lopuksi TaysienRivienKasittelija pudottaa ilmaan jääneet kokoelmat Vapaustarkastajan avulla.
 
-Peli päättyy, kun AktiivisenKokoelmanHallinnoija tai pelaaja painaa Luovuta-nappia (NapinKuuntelija), jolloin PelitilanHallinnoija pysäyttää Peliloopin.
+Peli päättyy, kun AktiivisenKokoelmanHallinnoija tai pelaaja painaa Luovuta-nappia (LuovutaNapinKuuntelija), jolloin PelitilanHallinnoija pysäyttää Peliloopin.
 
 Huipputulostoimintoja hallitaan useilla napeilla ja popup-ikkunoilla. Huipputulokset ovat tallennettuna tiedostoon, josta ne voidaan lukea tarvittaessa.
 
