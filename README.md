@@ -1,7 +1,7 @@
 # Tedris
 Tetriksen kaltainen peli koodauksen harjoittelua varten
 
-###Dokumentaatio
+### Dokumentaatio
 - [Aiheen kuvaus ja rakenne](dokumentaatio/aiheenKuvausJaRakenne.md)
 - [Tuntikirjanpito](dokumentaatio/tuntikirjanpito.md)
 - [PIT-raportti](https://htmlpreview.github.io/?https://github.com/Sxvz/Tedris/blob/master/dokumentaatio/pit-raportti/201610221940/index.html)
